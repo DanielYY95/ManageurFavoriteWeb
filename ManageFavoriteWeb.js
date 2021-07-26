@@ -1,11 +1,12 @@
-function saveWeb{
+
+
+function changeToInput{
+
+}
+
+
+function setWeb{
 
 
 }
 
-
-
-function deleteWeb{
-    
-
-}
