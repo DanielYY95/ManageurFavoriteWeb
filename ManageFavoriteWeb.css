@@ -1,3 +1,11 @@
-input:hover{
-    
+* { margin:0; padding:0; }
+a { text-decoration:none; }
+
+body{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.hidden{
+  display:none;
 }
