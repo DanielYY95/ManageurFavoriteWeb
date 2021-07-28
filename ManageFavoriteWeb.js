@@ -1,8 +1,10 @@
 const first_1=document.body.querySelector(".first_first")
-const first1_Form=first_1.querySelector("#first_1_Form")
-const first1_NameInput=first_1.querySelector(".first_1_Name")
-const first1_UrlInput=first_1.querySelector(".first_1_Url")
-const firfir=document.body.querySelector("#firfir")
+const first1_Form=document.body.querySelector("#first_1_Form")
+const first1_NameInput=document.body.querySelector(".first_1_Name")
+const first1_UrlInput=document.body.querySelector(".first_1_Url")
+const firfir=document.body.querySelector(".firfir")
+
+
 
 function aa(){
    return false; /* a href를 작동하지 않게 하는 것 */
@@ -10,11 +12,17 @@ function aa(){
 
 function setWeb(event){
   event.preventDefault();
+  first1_Form.classList.add('hidden');
   const first1_Name= first1_NameInput.value; 
   const first1_Url= first1_UrlInput.value;
+  localStorage.setItem("NAME_KEY",first1_Name);
   firfir.innertext=`${first1_Name}`;
+  /* first_1.href=`${first1_Url}`; */
+  first_1.setAttribute("href",`${first1_Url}`); /* 태그의 속성을 바꾸는 방법 */
+  
 
-/* input에 value를 넣었는데, 반영이 안되네.....*/
+/* input에 value를 넣었는데, 반영이 안되네.....
+ */
 
 }
 
@@ -27,7 +35,12 @@ function(){} 은 어떻게 작동하는지 이해하자!!!
 */
 
 
+
 first1_Form.addEventListener("submit", setWeb);
+
+
+
+
 
 
 /*
