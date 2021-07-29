@@ -1,4 +1,9 @@
-// Slack에서 도움을 받았음.
+// Slack에서 도움을 받았음.Slack에서 도움 받음. 
+1. input에 id, class 부여 필요 x
+2. 복습 필요- localstorage에 왜 set을 해야하는지
+3. location.href는 뭘까??
+4. getitem 과 null 여부를 통해 공백으로 제출한 경우를 배제할 수 있다. 그리고 값이 있는 한 계속 유지. 값을 없애면 다시 나오게하는 역할
+/////
 
 const div = document.getElementById("div");
 const form = document.getElementById("form");
