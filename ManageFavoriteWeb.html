@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>repl.it</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-    <div id="first_Col">
-      <li class="firfir"><a class="first_first" href="" target="_blank" onclick="return aa();">##
-        <form id="first_1_Form" class="hidden">
-          <input class="first_1_Name" />
-          <input class="first_1_Url" />
+	<div id="first_Col">
+		<li class="firfir" onclick="showMeInput()">
+			<a class="first_first" href="" target="_blank" onclick="return aa();">##
+				<form id="first_1_Form" class="hidden">
+					<input type="text" value="" />
+          <input type="text" value="" />
           <button>설정</button>
-          <span><span>
+          <button onclick="closeInput()">닫기</button>
       </form></a></li>
       <li class="first_second"><a href="###" target="_blank">##</a></li>
       <li class="first_third"><a href="###" target="_blank">##</a></li>
@@ -21,6 +24,7 @@
       <li class="first_fifth"><a href="###" target="_blank">##</a></li>
       <li class="first_sixth"><a href="###" target="_blank">##</a></li>
       <li class="first_seventh"><a href="###" target="_blank">##</a></li>
+      <button id="deleteButton"></button>
     </div>  
 
     <div id="second_Col">
@@ -61,6 +65,8 @@
       <li class="fifth_sixth"><a href="###" target="_blank">##</a></li>
       <li class="fifth_seventh"><a href="###" target="_blank">##</a></li>
     </div>  
-    
-</body>
+
+
+    <script src="script.js"></script>
+  </body>
 </html>
