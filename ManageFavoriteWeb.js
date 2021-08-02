@@ -27,6 +27,13 @@ function deleteData(){
   
 }
 
+function createX(){
+  const xButton = document.createElement("button");
+  xButton.innerText="❌";
+  xButton.addEventListener("click", deleteData);
+  document.body.getElementsByClassName("firfir").appendChild("xButton");
+} /* 여기서 막힘....... * /
+
 const dButton= document.body.querySelector("#deleteButton");
 dButton.innerText="❌";
 dButton.addEventListener("click", deleteData);
@@ -46,7 +53,7 @@ function setWeb(event){
   showMeInput();
   saveName(nickname);
   saveUrl(url);
-
+  createX();
 }
 
 function showMeInput(){
@@ -146,6 +153,10 @@ location.href 같은 경우는 href 에 있는 링크를 기본 페이지로 설
 
 + 보이기 버튼
 onclick="first_1_Form.style.display='block'" 으로도 가능!!
+
+11. TypeError: Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'. 에러
+
+
 
 });
 
