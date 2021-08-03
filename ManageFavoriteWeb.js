@@ -4,7 +4,6 @@ const first1_NameInput=document.body.querySelector("input:first-child");
 const first1_UrlInput=document.body.querySelector("input:nth-child(2)");
 const firfir=document.body.querySelector(".firfir");
 const sButton= document.body.querySelector("button:first-of-type");
-const cButton= document.body.querySelector("button:nth-of-type(2)");
 
 /* querySelector와 getElementById, getElemenByClassName 같은거 사용하는 차이 구별!!*/
 /*:first-child 의 경우 div 하위 엘리멘트중에 p 엘리먼트가 가장 첫번째에 위치해야  :first-child 가상클래스를 통해 선택할 수 있기 때문입니다.
@@ -16,7 +15,7 @@ function saveName(nickname) {
 }
 
 function saveUrl(url) {
-  localStorage.setItem("url", url); //이걸 하는 이유가 무엇인지 다시한번 알아보자
+  localStorage.setItem("url", url); //이걸 하는 이유가 무엇인지 다시한번 알아보자. 또한, JSON.stringify 을 하면 url을 망친다.
 }
 
 /* 이제 삭제 버튼을 만들고 단체로 적용하면 될듯 싶다!!!*/
@@ -27,12 +26,22 @@ function deleteData(){
   
 }
 
+/*
+function paintData(){
+  const Name = localStorage.getItem(nickname);
+  first_1.innertext= `${Name}`;
+
+} */
+
+/* 
 function createX(){
   const xButton = document.createElement("button");
   xButton.innerText="❌";
   xButton.addEventListener("click", deleteData);
   document.body.getElementsByClassName("firfir").appendChild("xButton");
-} /* 여기서 막힘....... * /
+}
+*/
+
 
 const dButton= document.body.querySelector("#deleteButton");
 dButton.innerText="❌";
@@ -53,11 +62,13 @@ function setWeb(event){
   showMeInput();
   saveName(nickname);
   saveUrl(url);
-  createX();
+  
+  /* createX(); */
+  
 }
 
 function showMeInput(){
-  first1_Form.classList.remove('hidden');
+  first1_Form.classList.toggle('hidden');
 }
 
 function closeInput(){
@@ -71,7 +82,6 @@ function(){} 은 어떻게 작동하는지 이해하자!!!
 
 first1_Form.addEventListener("submit", setWeb);
 sButton.addEventListener("click", setWeb);
-cButton.addEventListener("click", closeInput);
 
 /* first_1.setAttribute("href",`${first1_Url}`); /* 태그의 속성을 바꾸는 방법 */
 
@@ -82,8 +92,8 @@ if (getNickName != null && getUrl != null) {
   first1_Form.classList.add("hidden");
   first_1.innerText = getNickName;
   first_1.href = getUrl;
-  first_1.onclick=""; /* 이렇게 간단한 걸.... */
-  deleteData();
+  firfir.onclick=""; /* 이것덕분에 li태그의 onclick 이벤트를 없애는 */
+  first_1.onclick=""; /* a태그의 onclick 이벤트를 없애는 이렇게 간단한 걸.... */
 } 
 
 /** 
@@ -155,6 +165,27 @@ location.href 같은 경우는 href 에 있는 링크를 기본 페이지로 설
 onclick="first_1_Form.style.display='block'" 으로도 가능!!
 
 11. TypeError: Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'. 에러
+
+12. li와 a, form 태그를 분리하면 toggle을 사용할 수 있는 장점이 있지만 데이터가 날라가버리는 문제.... 또한, 설정된 이름을 누를때마다 form이 또 열리는...
+ 
+13. 표시만 하고 데이터 지우기
+
+const getNickName = localStorage.getItem("nickname");
+const getUrl = localStorage.getItem("url");
+
+if (getNickName != null && getUrl != null) {
+  first1_Form.classList.add("hidden");
+  first_1.innerText = getNickName;
+  first_1.href = getUrl;
+  firfir.onclick=""; 
+  first_1.onclick=""; 
+  deleteData(); // localStorage.removeItem("nickname"); localStorage.removeItem("url");
+} 
+
+로컬스토리지에 데이터가 있을경우 그 데이터를 표시하고 지우도록 deleteData()를 콜했기 때문
+
+14. 화면에 바로 뿌려주는...
+
 
 
 
