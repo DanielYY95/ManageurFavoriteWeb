@@ -26,12 +26,16 @@ function deleteData(){
   
 }
 
-/*
 function paintData(){
-  const Name = localStorage.getItem(nickname);
-  first_1.innertext= `${Name}`;
+  const getNickName = localStorage.getItem("nickname");
+  const getUrl = localStorage.getItem("url");
+  first1_Form.classList.add("hidden");
+  first_1.innerText = getNickName;
+  first_1.href = getUrl;
+  firfir.onclick=""; /* 이것덕분에 li태그의 onclick 이벤트를 없애는 */
+  first_1.onclick=""; /* a태그의 onclick 이벤트를 없애는 이렇게 간단한 걸.... */
 
-} */
+}
 
 /* 
 function createX(){
@@ -59,13 +63,15 @@ function setWeb(event){
   const url = first1_UrlInput.value;
   first1_NameInput.value= ""; 
   first1_UrlInput.value= "";
-  showMeInput();
   saveName(nickname);
   saveUrl(url);
+  showMeInput();
+  paintData();
+} 
   
   /* createX(); */
   
-}
+
 
 function showMeInput(){
   first1_Form.classList.toggle('hidden');
@@ -89,12 +95,8 @@ const getNickName = localStorage.getItem("nickname");
 const getUrl = localStorage.getItem("url");
 
 if (getNickName != null && getUrl != null) {
-  first1_Form.classList.add("hidden");
-  first_1.innerText = getNickName;
-  first_1.href = getUrl;
-  firfir.onclick=""; /* 이것덕분에 li태그의 onclick 이벤트를 없애는 */
-  first_1.onclick=""; /* a태그의 onclick 이벤트를 없애는 이렇게 간단한 걸.... */
-} 
+  paintData();
+}  // 정확히 왜 있는지???? 아, 이게 없으니 계속 유지가 안된다. 이는 값이 없어질 때까지 계속 유지하라는 소리다.
 
 /** 
 if (getNickName === null || getUrl === null) {
@@ -185,7 +187,14 @@ if (getNickName != null && getUrl != null) {
 로컬스토리지에 데이터가 있을경우 그 데이터를 표시하고 지우도록 deleteData()를 콜했기 때문
 
 14. 화면에 바로 뿌려주는...
+해당 스크립트의 실행 시점에 따라 달라지는 문제입니다.
+저게 function 으로 이루어져있다면 해당 function을 호출만 하면 화면에 뿌릴 수 있겠지만
+function이 아닌 load 상태에서 이뤄지는 스크립트라면
+saveName, saveUrl보다 이전에 실행되게 되어서
+saveName, saveUrl이후에는 실행되지 않게 됩니다.
 
+해당 로직을 이용하시려면 function으로 감싸시고 load되는 script에서 한번 콜하시고(바로 화면 출력)
+saveName, saveUrl 동작할 때 한번 콜하시면(계속 유지) 저장 후 로드까지 될꺼에요
 
 
 
