@@ -34,22 +34,30 @@ function paintData(){
   first_1.href = getUrl;
   firfir.onclick=""; /* 이것덕분에 li태그의 onclick 이벤트를 없애는 */
   first_1.onclick=""; /* a태그의 onclick 이벤트를 없애는 이렇게 간단한 걸.... */
-
+  
 }
 
-/* 
+const xButton = document.createElement("h1");
+xButton.innerText="ddddddddddddddddddddd";
+
 function createX(){
-  const xButton = document.createElement("button");
-  xButton.innerText="❌";
-  xButton.addEventListener("click", deleteData);
-  document.body.getElementsByClassName("firfir").appendChild("xButton");
+  const xButton = document.createElement('button');
+  xButton.innerHTML="❌"; //innertext 왜 안 되지.... 그래도 innerHTML 은 되네!! 
+  // 링크와 x 버튼 사이의 공백은 css에서 건들여줘야할 듯....
+  //const x = document.createTextNode("❌"); // innerText 대신 사용...
+  //xButton.appendChild(x);
+  firfir.appendChild(xButton); // 안 되었던 게 아니라 파묻혀있었던 거네...
+  //first1_Form.insertBefore(xButton, null); // 이것도 되긴하다. null은 삽입시점
+    
+  // 생성이 되지 않았던 이유. appendChild() 안에 ""가 들어가지 않는다!!
+  //xButton.addEventListener("click", deleteData);
 }
-*/
 
 
 const dButton= document.body.querySelector("#deleteButton");
 dButton.innerText="❌";
 dButton.addEventListener("click", deleteData);
+xButton.addEventListener("click", deleteData);
 
 //* 일단 만들어져있는걸 없애야... */
 
@@ -67,6 +75,7 @@ function setWeb(event){
   saveUrl(url);
   showMeInput();
   paintData();
+  createX();
 } 
   
   /* createX(); */
@@ -96,6 +105,8 @@ const getUrl = localStorage.getItem("url");
 
 if (getNickName != null && getUrl != null) {
   paintData();
+  createX();
+   // 일단 x버튼도 이렇게 두긴 했다....
 }  // 정확히 왜 있는지???? 아, 이게 없으니 계속 유지가 안된다. 이는 값이 없어질 때까지 계속 유지하라는 소리다.
 
 /** 
@@ -195,6 +206,14 @@ saveName, saveUrl이후에는 실행되지 않게 됩니다.
 
 해당 로직을 이용하시려면 function으로 감싸시고 load되는 script에서 한번 콜하시고(바로 화면 출력)
 saveName, saveUrl 동작할 때 한번 콜하시면(계속 유지) 저장 후 로드까지 될꺼에요
+
+15. 현재 상황
+- 아래 x버튼을 누르면 바로 적용되진 않음
+- x버튼을 링크 옆에 생성했으나 아래 x버튼처럼 작동하진 않음
+- 링크와 x버튼 사이의 간격을 벌려줘야
+- 이제 localStorage에서 id를 부여하는 등....
+- 전체로 적용될 수 있으려면,,,, 
+
 
 
 
