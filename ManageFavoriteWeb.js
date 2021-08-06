@@ -1,15 +1,97 @@
-const first_1=document.body.querySelector(".first_first");
-const first1_Form=document.body.querySelector("#first_1_Form");
-const first1_NameInput=document.body.querySelector("input:first-child");
-const first1_UrlInput=document.body.querySelector("input:nth-child(2)");
-const firfir=document.body.querySelector(".firfir");
-const sButton= document.body.querySelector("button:first-of-type");
+const first_1 = document.body.querySelector(".first_first");
+const first1_Form = document.body.querySelector("#first_1_Form");
+const first1_NameInput = document.body.querySelector("input:first-child");
+const first1_UrlInput = document.body.querySelector("input:nth-child(2)");
+const firfir = document.body.querySelector(".firfir");
+const sButton = document.body.querySelector("button:first-of-type");
+
+
+function saveToLocalStorage(){
+  function saveName(nickname) {
+  localStorage.setItem("nickname", nickname);
+  } 
+
+  function saveUrl(url) {
+  localStorage.setItem("url", url); 
+  }
+}
+
+
+function deleteData() {
+  localStorage.removeItem("nickname");
+  localStorage.removeItem("url"); 
+   paintData();
+}
+
+function paintData() {
+  const getNickName = localStorage.getItem("nickname");
+  const getUrl = localStorage.getItem("url");
+  first1_Form.classList.add("hidden");
+  first_1.innerText = getNickName;
+  first_1.href = getUrl;
+  firfir.onclick = ""; 
+  first_1.onclick = "";
+}
+
+function createX() {
+  const xButton = document.createElement('button');
+  xButton.innerHTML = "❌";
+  firfir.appendChild(xButton); 
+  xButton.addEventListener("click", deleteData); 
+}
+
+const dButton = document.body.querySelector("#deleteButton");
+dButton.innerText = "❌";
+dButton.addEventListener("click", deleteData);
+
+function setWeb(event) {
+  event.preventDefault();
+  const nickname = first1_NameInput.value;
+  const url = first1_UrlInput.value;
+  first1_NameInput.value = "";
+  first1_UrlInput.value = "";
+  saveName(nickname);
+  saveUrl(url);
+  showMeInput();
+  paintData();
+  createX();
+}
+
+function showMeInput() {
+  first1_Form.classList.toggle('hidden');
+}
+
+function closeInput() {
+  first1_Form.classList.add('hidden');
+} // 없어져도 되는거 아닌가??
+
+first1_Form.addEventListener("submit", setWeb);
+sButton.addEventListener("click", setWeb);
+
+const getNickName = localStorage.getItem("nickname");
+const getUrl = localStorage.getItem("url");
+
+if (getNickName != null && getUrl != null) {
+  paintData();
+  createX();
+} 
+
+
+/**##
+
+const first_1 = document.body.querySelector(".first_first");
+const first1_Form = document.body.querySelector("#first_1_Form");
+const first1_NameInput = document.body.querySelector("input:first-child");
+const first1_UrlInput = document.body.querySelector("input:nth-child(2)");
+const firfir = document.body.querySelector(".firfir");
+const sButton = document.body.querySelector("button:first-of-type");
 
 /* querySelector와 getElementById, getElemenByClassName 같은거 사용하는 차이 구별!!*/
 /*:first-child 의 경우 div 하위 엘리멘트중에 p 엘리먼트가 가장 첫번째에 위치해야  :first-child 가상클래스를 통해 선택할 수 있기 때문입니다.
 위 마크업은 div 하위 요소중에 가장 첫번째는 div 엘리먼트이기 때문에 선택할 수 없었던 것입니다. 
 반면에, :firt-of-type 은 실제 p 엘리먼트만을 기준으로 카운트를 하기 때문에 선택할 수 있는 것입니다.*/
 
+/**##
 function saveName(nickname) {
   localStorage.setItem("nickname", nickname);
 }
@@ -18,75 +100,74 @@ function saveUrl(url) {
   localStorage.setItem("url", url); //이걸 하는 이유가 무엇인지 다시한번 알아보자. 또한, JSON.stringify 을 하면 url을 망친다.
 }
 
+
 /* 이제 삭제 버튼을 만들고 단체로 적용하면 될듯 싶다!!!*/
-function deleteData(){  
+/**##
+function deleteData() {
   localStorage.removeItem("nickname");
   localStorage.removeItem("url"); // 이걸로 키와 값을 없앴으나 바로 반영되지는 않는듯함. localStorage.clear();은 아예 초기화//
+   paintData();
 
-  
 }
 
-function paintData(){
-  const getNickName = localStorage.getItem("nickname");
+function paintData() {
+  const getNickName = localStorage.getItem("nickname"); //삭제하고나서 유용하다.
   const getUrl = localStorage.getItem("url");
   first1_Form.classList.add("hidden");
   first_1.innerText = getNickName;
   first_1.href = getUrl;
-  firfir.onclick=""; /* 이것덕분에 li태그의 onclick 이벤트를 없애는 */
-  first_1.onclick=""; /* a태그의 onclick 이벤트를 없애는 이렇게 간단한 걸.... */
-  
+  firfir.onclick = ""; // 이것덕분에 li태그의 onclick 이벤트를 없애는 
+  first_1.onclick = ""; // a태그의 onclick 이벤트를 없애는 이렇게 간단한 걸.... 
+
 }
 
-const xButton = document.createElement("h1");
-xButton.innerText="ddddddddddddddddddddd";
-
-function createX(){
+/**##
+function createX() {
   const xButton = document.createElement('button');
-  xButton.innerHTML="❌"; //innertext 왜 안 되지.... 그래도 innerHTML 은 되네!! 
+  xButton.innerHTML = "❌"; //innertext 왜 안 되지.... 그래도 innerHTML 은 되네!! 
   // 링크와 x 버튼 사이의 공백은 css에서 건들여줘야할 듯....
   //const x = document.createTextNode("❌"); // innerText 대신 사용...
   //xButton.appendChild(x);
   firfir.appendChild(xButton); // 안 되었던 게 아니라 파묻혀있었던 거네...
   //first1_Form.insertBefore(xButton, null); // 이것도 되긴하다. null은 삽입시점
-    
+
   // 생성이 되지 않았던 이유. appendChild() 안에 ""가 들어가지 않는다!!
   //xButton.addEventListener("click", deleteData);
+  xButton.addEventListener("click", deleteData); // x버튼을 눌러도 작동하지 않았던 이유가 내가 바깥에다가 xbutton을 만들어놓고 addEventListener 이벤트를 바깥에다가 만들었기에... 어떻게든 setWeb(값을 저장, 화면 출력)과 paint(화면출력 유지) 같은 function에 설정해야한다.
 }
 
 
-const dButton= document.body.querySelector("#deleteButton");
-dButton.innerText="❌";
+const dButton = document.body.querySelector("#deleteButton");
+dButton.innerText = "❌";
 dButton.addEventListener("click", deleteData);
-xButton.addEventListener("click", deleteData);
+
 
 //* 일단 만들어져있는걸 없애야... */
 
-function aa(){
-   return false; /* a href를 작동하지 않게 하는 것 */
-}
 
-function setWeb(event){
+/**##
+function setWeb(event) {
   event.preventDefault();
-  const nickname = first1_NameInput.value; 
+  const nickname = first1_NameInput.value;
   const url = first1_UrlInput.value;
-  first1_NameInput.value= ""; 
-  first1_UrlInput.value= "";
+  first1_NameInput.value = "";
+  first1_UrlInput.value = "";
   saveName(nickname);
   saveUrl(url);
   showMeInput();
   paintData();
   createX();
-} 
-  
-  /* createX(); */
-  
+}
+
+/* createX(); */
 
 
-function showMeInput(){
+/**##
+function showMeInput() {
   first1_Form.classList.toggle('hidden');
 }
 
-function closeInput(){
+function closeInput() {
   first1_Form.classList.add('hidden');
 }
 
@@ -95,19 +176,33 @@ function(){} 은 어떻게 작동하는지 이해하자!!!
 그리고 toggle을 사용하면 input, button 까지 적용되기 때문에 일단은 remove로 적용해놨다. 다른 대안은 없나... ===> 닫기 버튼을 따로 만든다???
 */
 
+/**##
 first1_Form.addEventListener("submit", setWeb);
 sButton.addEventListener("click", setWeb);
 
 /* first_1.setAttribute("href",`${first1_Url}`); /* 태그의 속성을 바꾸는 방법 */
 
+/**##
 const getNickName = localStorage.getItem("nickname");
 const getUrl = localStorage.getItem("url");
 
 if (getNickName != null && getUrl != null) {
   paintData();
   createX();
-   // 일단 x버튼도 이렇게 두긴 했다....
+  // 일단 x버튼도 이렇게 두긴 했다....
 }  // 정확히 왜 있는지???? 아, 이게 없으니 계속 유지가 안된다. 이는 값이 없어질 때까지 계속 유지하라는 소리다.
+
+
+*/
+
+/* else{
+  showMeInput();
+  first_1.innerText = "##";
+  first_1.href = "";
+  firfir.onclick = "showMeInput()"; 
+  first_1.onclick = "return aa();"; 
+} // 삭제를 진행한 이후로 해야한다. 안 그러면 초기 값과 충돌되는 문제...
+
 
 /** 
 if (getNickName === null || getUrl === null) {
@@ -208,13 +303,19 @@ saveName, saveUrl이후에는 실행되지 않게 됩니다.
 saveName, saveUrl 동작할 때 한번 콜하시면(계속 유지) 저장 후 로드까지 될꺼에요
 
 15. 현재 상황
-- 아래 x버튼을 누르면 바로 적용되진 않음
-- x버튼을 링크 옆에 생성했으나 아래 x버튼처럼 작동하진 않음
-- 링크와 x버튼 사이의 간격을 벌려줘야
+- 아래 x버튼을 누르면 바로 적용되진 않음 => 해결. 삭제하는 function 안에 화면 출력 유지 함수를 넣어야한다. 그러고나니 삭제하고나서 바로 적용되고 x버튼이 대신 자리를 차지하게되는.... 나쁘지 않은데??? 새로고침하면 다시 생성된다.
+- x버튼을 링크 옆에 생성했으나 아래 x버튼처럼 작동하진 않음 => 해결 => 이제는 전체 localStorage가 아니라 해당하는 것만 지우게끔해야.
+- 링크와 x버튼 사이의 간격을 벌려줘야 ==> 대충 해결함. but 이쁘지가....
 - 이제 localStorage에서 id를 부여하는 등....
-- 전체로 적용될 수 있으려면,,,, 
+- 전체로 적용될 수 있으려면,,,,  // 느낌상 function(x) 으로 argument를 미지수로 설정한다음,
+전체 함수를 main 함수로 포괄하는 것이 좋을듯. 다만 html로부터 js로 다 불러와야하는 건....
+- ##가 아니라 같은 줄의 여백을 눌러도 toggle이 되는 문제를 어떻게 해결할까? ==>> li 태그 대신 a태그에 토글함수를 부여했더니 되었다!!! li가 display: block; 이었기에 쫙 이어진 것이었다. display: inline; 같은 걸로 했다간 세로가 아니라 가로 배열이 되어버리는 문제..
+li vs a 태그의 크기가 다르다.
 
-
+16. function aa() {
+  return false; /* a href를 작동하지 않게 하는 것 
+} // 이런식으로 기본적인 이벤트를 작동하지않게 할 수 있다.
+// onclick 에 작성 시  onclick="return aa();"  이렇게 작성해야한다.
 
 
 });
