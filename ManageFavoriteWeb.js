@@ -1,34 +1,36 @@
-const first_1 = document.body.querySelector(".first_first");
-const first1_Form = document.body.querySelector("#first_1_Form");
-const first1_NameInput = document.body.querySelector("input:first-child");
-const first1_UrlInput = document.body.querySelector("input:nth-child(2)");
 const firfir = document.body.querySelector(".firfir");
-const sButton = document.body.querySelector("button:first-of-type");
+const first_1 = firfir.querySelector(".first_first");
+const first1_Form = document.body.querySelector("#first_1_Form");
+const first1_NameInput = first1_Form.querySelector("input:first-child");
+const first1_UrlInput = first1_Form.querySelector("input:nth-child(2)");
+const sButton = first1_Form.querySelector("button:first-of-type");
+const NEWLIST="nList";
 
+let nList=[]; //array 형태로 초기화 시작
 
-function saveToLocalStorage(){
-  function saveName(nickname) {
-  localStorage.setItem("nickname", nickname);
-  } 
-
-  function saveUrl(url) {
-  localStorage.setItem("url", url); 
-  }
-}
+function saveData() {
+  localStorage.setItem(NEWLIST, JSON.stringify(nList));
+} // {name: ---- , url: ----, id:----}}이 하나의 요소인 형태로 + 각 값을 string 형태로 저장!
 
 
 function deleteData() {
-  localStorage.removeItem("nickname");
-  localStorage.removeItem("url"); 
-   paintData();
-}
+  const xButton = document.querySelector('button');
+  xButton.remove();
+  const newData= {nickname: first1_NameInput.value, url: first1_UrlInput.value, id:Date.now()};
+  // x버튼을 누를 때 form에 해당하는 게 X. 그리고 이의 id를 조회하여 이를 localStorage에서만 삭제할 수 있으면 좋은데....
+  localStorage.removeItem(NEWLIST);
+  nList=nList.filter((toBye)=>toBye.id !==parseInt(first1_Form.id));
+  saveData();
+  paintData(newData);
+  alert("해당 즐겨찾기를 삭제하였습니다.");
+} // 노마드의 경우, 새로 생성된 객체를 없애면 되는 거지만, 여기는 localStorage에서 없애야....
+// 누른 것에 해당되는 localStorage만 없애기는 어떻게???
 
-function paintData() {
-  const getNickName = localStorage.getItem("nickname");
-  const getUrl = localStorage.getItem("url");
+function paintData(newData) {
   first1_Form.classList.add("hidden");
-  first_1.innerText = getNickName;
-  first_1.href = getUrl;
+  first_1.innerText = newData.nickname;
+  first_1.href = newData.url;
+  first1_Form.id = newData.id; // 가능한가??
   firfir.onclick = ""; 
   first_1.onclick = "";
 }
@@ -40,41 +42,35 @@ function createX() {
   xButton.addEventListener("click", deleteData); 
 }
 
-const dButton = document.body.querySelector("#deleteButton");
-dButton.innerText = "❌";
-dButton.addEventListener("click", deleteData);
-
 function setWeb(event) {
   event.preventDefault();
-  const nickname = first1_NameInput.value;
-  const url = first1_UrlInput.value;
+  const newData= {nickname: first1_NameInput.value, url: first1_UrlInput.value, id:Date.now()};
   first1_NameInput.value = "";
   first1_UrlInput.value = "";
-  saveName(nickname);
-  saveUrl(url);
-  showMeInput();
-  paintData();
+  nList.push(newData); // array에 저장
+  saveData();
+  paintData(newData);
   createX();
-}
+}  // 값 저장, 공백, array 저장, 폼 가리고, 결과 나타내고,      x버튼 생성
 
 function showMeInput() {
   first1_Form.classList.toggle('hidden');
 }
 
-function closeInput() {
-  first1_Form.classList.add('hidden');
-} // 없어져도 되는거 아닌가??
-
 first1_Form.addEventListener("submit", setWeb);
 sButton.addEventListener("click", setWeb);
 
-const getNickName = localStorage.getItem("nickname");
-const getUrl = localStorage.getItem("url");
+const getData = localStorage.getItem(NEWLIST); // array에 저장된 각 값 불러오기
 
-if (getNickName != null && getUrl != null) {
-  paintData();
+if (getData != '[]') {
+  const parsedList = JSON.parse(getData); // 각 값에 인덱스 부여
+  nList = parsedList; // 인덱스가 부여된 상태 유지 
+  parsedList.forEach(paintData); // 위 과정들을 유지한 상태에서 각 값에 paintData 적용
   createX();
 } 
+
+/// x가 삭제되지 않았던 문제... getData 로 바꾸고나서 단순히 null 이 아니라 '[]'로 해야하는 거였다!!!! 
+
 
 
 /**##
@@ -316,6 +312,13 @@ li vs a 태그의 크기가 다르다.
   return false; /* a href를 작동하지 않게 하는 것 
 } // 이런식으로 기본적인 이벤트를 작동하지않게 할 수 있다.
 // onclick 에 작성 시  onclick="return aa();"  이렇게 작성해야한다.
+
+
+17. id 부여
+- 빈 array 배열을 만든다.
+- 저장할 때,  string 형태로 저장한다.
+- newData 와 같이 각 요소를 {name: --- , url:----, id:----} 꼴로 저장할 수 있도록 선언.
+- newData 를 활용하여 저장하고 표출.
 
 
 });
