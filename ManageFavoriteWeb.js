@@ -11,16 +11,19 @@ let nList=[]; //array 형태로 초기화 시작
 function saveData() {
   localStorage.setItem(NEWLIST, JSON.stringify(nList));
 } // {name: ---- , url: ----, id:----}}이 하나의 요소인 형태로 + 각 값을 string 형태로 저장!
-
+//웹 스토리지를 사용할 때 주의할 점은 오직 문자형 데이터 타입만 지원한다는 것이다. 
 
 function deleteData() {
   const xButton = document.querySelector('button');
   xButton.remove();
   const newData= {nickname: first1_NameInput.value, url: first1_UrlInput.value, id:Date.now()};
   // x버튼을 누를 때 form에 해당하는 게 X. 그리고 이의 id를 조회하여 이를 localStorage에서만 삭제할 수 있으면 좋은데....
-  localStorage.removeItem(NEWLIST);
-  nList=nList.filter((toBye)=>toBye.id !==parseInt(first1_Form.id));
-  saveData();
+  localStorage.removeItem(NEWLIST); //array를 통쨰로 지웠다가
+  
+  // function deletedData(element)  {if(element.id === 'apple') return true;}
+  //nList.findindexof();
+  nList=nList.filter((toBye)=>toBye.id !==parseInt(first1_Form.id)); //필터한 새로운 array 설정 // nList=nList.filter(function(toBye) {if toBye.id !==parseInt(first1_Form.id)return true;}
+  saveData(); // 그 array를 저장
   paintData(newData);
   alert("해당 즐겨찾기를 삭제하였습니다.");
 } // 노마드의 경우, 새로 생성된 객체를 없애면 되는 거지만, 여기는 localStorage에서 없애야....
@@ -320,6 +323,27 @@ li vs a 태그의 크기가 다르다.
 - newData 와 같이 각 요소를 {name: --- , url:----, id:----} 꼴로 저장할 수 있도록 선언.
 - newData 를 활용하여 저장하고 표출.
 
+
+18. findindex 객체의 주소찾기(특히, 객체가 갖고있는 속성을 활용하여)
+예시)
+const arr = [
+  {name : 'banana', price: 1000},
+  {name : 'apple', price:1500},
+  {name : 'orange', price: 2000}
+];
+
+function findApple(element)  {
+  if(element.name === 'apple') return true;
+}
+
+document.writeln(arr.findIndex(findApple)); // 1
+
+19. filter
+
+var arr2 = arr.filter(function (n) {
+    return n % 5 == 0;
+==> var arr2 = arr.filter((n)=>return n % 5 == 0);
+// 5의 배수인 것만 포함한 배열로 탄생
 
 });
 
