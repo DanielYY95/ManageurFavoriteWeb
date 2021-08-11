@@ -14,8 +14,6 @@ function saveData() {
 //웹 스토리지를 사용할 때 주의할 점은 오직 문자형 데이터 타입만 지원한다는 것이다. 
 
 function deleteData() {
-  const xButton = document.querySelector('button');
-  xButton.remove();
   const newData= {nickname: first1_NameInput.value, url: first1_UrlInput.value, id:Date.now()};
   // x버튼을 누를 때 form에 해당하는 게 X. 그리고 이의 id를 조회하여 이를 localStorage에서만 삭제할 수 있으면 좋은데....
   localStorage.removeItem(NEWLIST); //array를 통쨰로 지웠다가
@@ -65,7 +63,7 @@ sButton.addEventListener("click", setWeb);
 
 const getData = localStorage.getItem(NEWLIST); // array에 저장된 각 값 불러오기
 
-if (getData != '[]') {
+if ((getData !== null) &&  (getData !== '[]')) {
   const parsedList = JSON.parse(getData); // 각 값에 인덱스 부여
   nList = parsedList; // 인덱스가 부여된 상태 유지 
   parsedList.forEach(paintData); // 위 과정들을 유지한 상태에서 각 값에 paintData 적용
@@ -74,6 +72,22 @@ if (getData != '[]') {
 
 /// x가 삭제되지 않았던 문제... getData 로 바꾸고나서 단순히 null 이 아니라 '[]'로 해야하는 거였다!!!! 
 
+
+/*
+현재 상황
+- 아래 x버튼을 누르면 바로 적용되진 않음 => 해결. 삭제하는 function 안에 화면 출력 유지 함수를 넣어야한다. 그러고나니 삭제하고나서 바로 적용되고 x버튼이 대신 자리를 차지하게되는.... 나쁘지 않은데??? 새로고침하면 다시 생성된다.
+- x버튼을 링크 옆에 생성했으나 아래 x버튼처럼 작동하진 않음 => 해결 => 이제는 전체 localStorage가 아니라 해당하는 것만 지우게끔해야.
+- 링크와 x버튼 사이의 간격을 벌려줘야 ==> 대충 해결함. but 이쁘지가....
+- 이제 localStorage에서 id를 부여하는 등.... ==> 해결
+- ##가 아니라 같은 줄의 여백을 눌러도 toggle이 되는 문제를 어떻게 해결할까? ==>> li 태그 대신 a태그에 토글함수를 부여했더니 되었다!!! li가 display: block; 이었기에 쫙 이어진 것이었다. display: inline; 같은 걸로 했다간 세로가 아니라 가로 배열이 되어버리는 문제..
+li vs a 태그의 크기가 다르다.
+
+- 전체로 적용될 수 있으려면,,,,  // 느낌상 function(x) 으로 argument를 미지수로 설정한다음,
+전체 함수를 main 함수로 포괄하는 것이 좋을듯. 다만 html로부터 js로 다 불러와야하는 건....
+=> class 통일하라고 하는디...
+
+
+/
 
 
 /**##
@@ -301,16 +315,6 @@ saveName, saveUrl이후에는 실행되지 않게 됩니다.
 해당 로직을 이용하시려면 function으로 감싸시고 load되는 script에서 한번 콜하시고(바로 화면 출력)
 saveName, saveUrl 동작할 때 한번 콜하시면(계속 유지) 저장 후 로드까지 될꺼에요
 
-15. 현재 상황
-- 아래 x버튼을 누르면 바로 적용되진 않음 => 해결. 삭제하는 function 안에 화면 출력 유지 함수를 넣어야한다. 그러고나니 삭제하고나서 바로 적용되고 x버튼이 대신 자리를 차지하게되는.... 나쁘지 않은데??? 새로고침하면 다시 생성된다.
-- x버튼을 링크 옆에 생성했으나 아래 x버튼처럼 작동하진 않음 => 해결 => 이제는 전체 localStorage가 아니라 해당하는 것만 지우게끔해야.
-- 링크와 x버튼 사이의 간격을 벌려줘야 ==> 대충 해결함. but 이쁘지가....
-- 이제 localStorage에서 id를 부여하는 등....
-- 전체로 적용될 수 있으려면,,,,  // 느낌상 function(x) 으로 argument를 미지수로 설정한다음,
-전체 함수를 main 함수로 포괄하는 것이 좋을듯. 다만 html로부터 js로 다 불러와야하는 건....
-- ##가 아니라 같은 줄의 여백을 눌러도 toggle이 되는 문제를 어떻게 해결할까? ==>> li 태그 대신 a태그에 토글함수를 부여했더니 되었다!!! li가 display: block; 이었기에 쫙 이어진 것이었다. display: inline; 같은 걸로 했다간 세로가 아니라 가로 배열이 되어버리는 문제..
-li vs a 태그의 크기가 다르다.
-
 16. function aa() {
   return false; /* a href를 작동하지 않게 하는 것 
 } // 이런식으로 기본적인 이벤트를 작동하지않게 할 수 있다.
@@ -344,6 +348,19 @@ var arr2 = arr.filter(function (n) {
     return n % 5 == 0;
 ==> var arr2 = arr.filter((n)=>return n % 5 == 0);
 // 5의 배수인 것만 포함한 배열로 탄생
+
+
+20. 
+TypeError: Cannot read property 'forEach' of null
+    at /script.js:71:14
+TypeError: Cannot read property 'push' of null
+    at HTMLButtonElement.setWeb (/script.js:53:9)
+
+forEach, push 쓰는 변수가 배열이 맞는지 콘솔 찍어서 확인
+
+==>>> nList 를 콘솔했는데 null 인 경우도 있고, [] 경우도 있다. 뭐여...
+
+
 
 });
 
