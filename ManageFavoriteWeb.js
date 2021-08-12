@@ -75,6 +75,44 @@ if ((getData !== null) &&  (getData !== '[]')) {
 
 /*
 현재 상황
+
+- 전체로 적용될 수 있으려면,,,,  // 느낌상 function(x) 으로 argument를 미지수로 설정한다음,
+전체 함수를 main 함수로 포괄하는 것이 좋을듯. 다만 html로부터 js로 다 불러와야하는 건....
+=> class 통일하라고 하는디...
+- x에 id를 부여해야하나... 사라졌을 때 해당 값이 몇 번째 요소였는지??? 흠,,,, 나중에 리스트끼리 순서 바꾸고 그러고 싶은데, 막 꼬이잖아.....
+
+** index
+(1) findindex 객체의 주소찾기(특히, 객체가 갖고있는 속성을 활용하여)
+예시)
+const arr = [
+  {name : 'banana', price: 1000},
+  {name : 'apple', price:1500},
+  {name : 'orange', price: 2000}
+];
+
+function findApple(element)  {
+  if(element.name === 'apple') return true;
+}
+
+document.writeln(arr.findIndex(findApple)); // 1
+===> 이걸로 localStorage에서 id 찾아가지구... 아니면 id를 class의 i번째 요소인지 따라 
+i로 부여해야하나?
+--------------
+// 배열에서 특정 항목이 몇번째 원소인지를 알고 싶을 때 사용한다.
+
+const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+const index = superheroes.indexOf('토르');
+console.log(index); // 2
+1
+2
+3
+const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+const index = superheroes.indexOf('토르');
+console.log(index); // 2
+배열 안에 있는 값들이 객체이거나 특정 조건을 확인해야하는 경우에는 findIndex를 사용한다.
+
+
+---------------------------------------완료
 - 아래 x버튼을 누르면 바로 적용되진 않음 => 해결. 삭제하는 function 안에 화면 출력 유지 함수를 넣어야한다. 그러고나니 삭제하고나서 바로 적용되고 x버튼이 대신 자리를 차지하게되는.... 나쁘지 않은데??? 새로고침하면 다시 생성된다.
 - x버튼을 링크 옆에 생성했으나 아래 x버튼처럼 작동하진 않음 => 해결 => 이제는 전체 localStorage가 아니라 해당하는 것만 지우게끔해야.
 - 링크와 x버튼 사이의 간격을 벌려줘야 ==> 대충 해결함. but 이쁘지가....
@@ -82,9 +120,7 @@ if ((getData !== null) &&  (getData !== '[]')) {
 - ##가 아니라 같은 줄의 여백을 눌러도 toggle이 되는 문제를 어떻게 해결할까? ==>> li 태그 대신 a태그에 토글함수를 부여했더니 되었다!!! li가 display: block; 이었기에 쫙 이어진 것이었다. display: inline; 같은 걸로 했다간 세로가 아니라 가로 배열이 되어버리는 문제..
 li vs a 태그의 크기가 다르다.
 
-- 전체로 적용될 수 있으려면,,,,  // 느낌상 function(x) 으로 argument를 미지수로 설정한다음,
-전체 함수를 main 함수로 포괄하는 것이 좋을듯. 다만 html로부터 js로 다 불러와야하는 건....
-=> class 통일하라고 하는디...
+
 
 
 /
