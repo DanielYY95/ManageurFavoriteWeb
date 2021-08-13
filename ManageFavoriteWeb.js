@@ -58,7 +58,7 @@ function showMeInput() {
   first1_Form.classList.toggle('hidden');
 }
 
-first1_Form.addEventListener("submit", setWeb);
+//first1_Form.addEventListener("submit", setWeb); 설정을 클릭할 때만
 sButton.addEventListener("click", setWeb);
 
 const getData = localStorage.getItem(NEWLIST); // array에 저장된 각 값 불러오기
@@ -69,6 +69,7 @@ if ((getData !== null) &&  (getData !== '[]')) {
   parsedList.forEach(paintData); // 위 과정들을 유지한 상태에서 각 값에 paintData 적용
   createX();
 } 
+
 
 /// x가 삭제되지 않았던 문제... getData 로 바꾸고나서 단순히 null 이 아니라 '[]'로 해야하는 거였다!!!! 
 
@@ -110,6 +111,11 @@ const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 �
 const index = superheroes.indexOf('토르');
 console.log(index); // 2
 배열 안에 있는 값들이 객체이거나 특정 조건을 확인해야하는 경우에는 findIndex를 사용한다.
+
+(2) 드래그 앤 드롭
+draggable="true" ondrop="drop(event)"
+
+
 
 
 ---------------------------------------완료
