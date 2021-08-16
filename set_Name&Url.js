@@ -3,6 +3,8 @@
 2. 복습 필요- localstorage에 왜 set을 해야하는지
 3. location.href는 뭘까??
 4. getitem 과 null 여부를 통해 공백으로 제출한 경우를 배제할 수 있다. 그리고 값이 있는 한 계속 유지. 값을 없애면 다시 나오게하는 역할
+5. class 로 통일
+
 /////
 
 const div = document.getElementById("div");
