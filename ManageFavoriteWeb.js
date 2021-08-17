@@ -2,8 +2,23 @@
 // const N = 눌렀을 때 해당되는 index, onclick 이벤트했을 때 findindex
 // 그리고 그 index를 확인했으면 nth-child(index)에 해당하는 태그에 ㄱㄱ
 
+// x button의 경우, id같은 걸 따로 부여해줘야할 듯... 아닌가... 뭔가 좀 애매하네... button[]가 아니라 해당되는 form 안에 있는 두번째 button을 지우는 방식 같은 걸로 해야할 듯...
 
-const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
+function showMeInput(){
+    const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
+    const FORM = document.body.getElementsByTagName('form');
+    for (i = 0; i < A.length; i++) {
+        (function(idx) {
+            A[idx].onclick = function(){
+              FORM[idx].classList.toggle('hidden'); // 오오 좋았다!! 잘 응용. 몇번째 form 태그
+            } 
+            })(i);
+    }
+}
+
+showMeInput();
+
+/*const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
 for (i = 0; i < A.length; i++) {
     (function(idx) {
         A[idx].onclick = function() { 
@@ -11,7 +26,7 @@ for (i = 0; i < A.length; i++) {
         }
     })(i);
 }
-/* const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
+ const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
     function handlerFn(idx) {
       A[idx].onclick = function () {
         alert(idx);
@@ -92,11 +107,6 @@ function setWeb(event) {
   paintData(newData);
   createX();
 }  // 값 저장, 공백, array 저장, 폼 가리고, 결과 나타내고,      x버튼 생성
-
-function showMeInput() {
-  first1_Form.classList.toggle('hidden');
-} // 해당 태그를 눌렀는데 그 태그가 몇번째인지에 따라 몇번째_Form.classList.toggle()이 되어야..
-//그리고 해당되는 a태그의 form에!!!
 
 
 //first1_Form.addEventListener("submit", setWeb); 설정을 클릭할 때만
