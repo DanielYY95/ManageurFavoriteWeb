@@ -4,54 +4,6 @@
 
 // x button의 경우, id같은 걸 따로 부여해줘야할 듯... 아닌가... 뭔가 좀 애매하네... button[]가 아니라 해당되는 form 안에 있는 두번째 button을 지우는 방식 같은 걸로 해야할 듯...
 
-function showMeInput(){
-    const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
-    const FORM = document.body.getElementsByTagName('form');
-    for (i = 0; i < A.length; i++) {
-        (function(idx) {
-            A[idx].onclick = function(){
-              FORM[idx].classList.toggle('hidden'); // 오오 좋았다!! 잘 응용. 몇번째 form 태그
-            } 
-            })(i);
-    }
-}
-
-showMeInput();
-
-/*const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
-for (i = 0; i < A.length; i++) {
-    (function(idx) {
-        A[idx].onclick = function() { 
-            alert(idx); 
-        }
-    })(i);
-}
- const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
-    function handlerFn(idx) {
-      A[idx].onclick = function () {
-        alert(idx);
-      };
-    }
-
-    for (i = 0; i < A.length; i++) {
-      handlerFn(i);
-    } 와 같다 */
-// 계속 반복문!!! 지속적으로 사용할 수 있으려면 이러한 for문같은 걸로 진행해야한다.
-// 태그를 불러오고 나면, 태그 배열이 생기는 것 같다.. 
-//idx 가 argument이니까, 해당 argument를 a태그의 인덱스로 하고 onclick이벤트에 따른 함수를 실행
-// 근데 클릭했을 때 어떻게 해당하는 index가 되는가?? 그리고 (i)는 뭐지??
-
-
-// for (초기화;조건식;증감식){참인 경우 계속 반복하는 함수}
-// .onclick = function(){} 은 클릭 이벤트리스너와 같다.
-//### 저 for 반복문을 통해 모든 A의 현재 인덱스에 위치한 태그에 클릭이벤트를 부착한 것이다!!!!
-// (i)가 idx 로 들어간다??? 
-// IIFE 이다. 즉시실행함수. 그냥 간편하게 작성하기위해 저렇게 한 것 같다. for문 안에 다 작성해놓고, function 선언하고나서 그 선언한 함수에 들어갈 argument를 반복하는 것
-//https://blog.naver.com/leeba37/221802546747 참고
-
-
-
-
 const firfir = document.body.querySelector(".firfir");
 const first_1 = firfir.querySelector(".first_first");
 const first1_Form = document.body.querySelector("#first_1_Form");
@@ -81,22 +33,27 @@ function deleteData() {
 } // 노마드의 경우, 새로 생성된 객체를 없애면 되는 거지만, 여기는 localStorage에서 없애야....
 // 누른 것에 해당되는 localStorage만 없애기는 어떻게???
 
-function paintData(newData) {
+
+/*function paintData(newData) {
   first1_Form.classList.add("hidden");
   first_1.innerText = newData.nickname;
   first_1.href = newData.url;
   first1_Form.id = newData.id; // 가능한가??
   firfir.onclick = ""; 
   first_1.onclick = "";
-}
-
+} 
+*/
 function createX() {
   const xButton = document.createElement('button');
   xButton.innerHTML = "❌";
   firfir.appendChild(xButton); 
   xButton.addEventListener("click", deleteData); 
-}
+} 
+///firfir 대신 li[idx]
 
+
+
+/*
 function setWeb(event) {
   event.preventDefault();
   const newData= {nickname: first1_NameInput.value, url: first1_UrlInput.value, id:Date.now()};
@@ -107,10 +64,63 @@ function setWeb(event) {
   paintData(newData);
   createX();
 }  // 값 저장, 공백, array 저장, 폼 가리고, 결과 나타내고,      x버튼 생성
+*/
+
+const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
+const FORM = document.body.getElementsByTagName('form');
+const li = document.body.getElementsByTagName('li');
+
+function paintData(newData, idx){
+  FORM[idx].classList.add("hidden");
+  A[idx].innerText = newData.nickname;
+  A[idx].href = newData.url;
+  FORM[idx].id = newData.id; 
+  li[idx].onclick = ""; 
+  A[idx].onclick = "";
+}
+/*
+function createX(idx) {
+  const xButton = document.createElement('button');
+  xButton.innerHTML = "❌";
+  li[idx].appendChild(xButton); 
+  xButton.addEventListener("click", deleteData); 
+} */
+
+function SET(){
+    for (i = 0; i < FORM.length; i++) {
+        (function setWeb(idx) {
+            sButton.onclick = function(event){
+              event.preventDefault();
+              const NameInput = FORM[idx].querySelector("input:first-child");
+              const UrlInput = FORM[idx].querySelector("input:nth-child(2)");
+              const newData= {nickname:  NameInput.value, url: UrlInput.value, id:Date.now()};
+              NameInput.value = "";
+              UrlInput.value = "";
+              nList.push(newData); 
+              saveData();
+              paintData(newData, idx);
+              createX();
+            } 
+            })(i);
+    }
+}
+
+SET();
+/*
+ function handlerFn(idx) {
+      A[idx].onclick = function () {
+        alert(idx);
+      };
+    }
+
+    for (i = 0; i < A.length; i++) {
+      handlerFn(i);
+    }
+*/
 
 
 //first1_Form.addEventListener("submit", setWeb); 설정을 클릭할 때만
-sButton.addEventListener("click", setWeb);
+//sButton.addEventListener("click", setWeb);
 
 const getData = localStorage.getItem(NEWLIST); // array에 저장된 각 값 불러오기
 
