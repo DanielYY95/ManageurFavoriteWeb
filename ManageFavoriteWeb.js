@@ -1,3 +1,23 @@
+const A = document.body.getElementsByTagName('a'); 
+const FORM = document.body.getElementsByTagName('form');
+const LI = document.body.getElementsByTagName('li');
+
+const NameInput = FORM[0].querySelector("input:first-child");
+const UrlInput = FORM[0].querySelector("input:nth-child(2)");
+const sButton = FORM[0].querySelector("button:first-of-type");
+
+const firfir = document.body.querySelector(".firfir");
+const first_1 = firfir.querySelector(".first_first");
+const first1_Form = document.body.querySelector("#first_1_Form");
+
+const NEWLIST="nList";
+
+let nList=[]; //array 형태로 초기화 시작
+
+////////////////////////////////////////////////////////////
+
+
+
 // 클래스 이름: nth-child(N));
 // const N = 눌렀을 때 해당되는 index, onclick 이벤트했을 때 findindex
 // 그리고 그 index를 확인했으면 nth-child(index)에 해당하는 태그에 ㄱㄱ
@@ -10,99 +30,101 @@
 // 3. 계속 새로고침 되는 문제....
 
 
-
-/*
-function main(){
-  const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
-  const FORM = document.body.getElementsByTagName('form');
-  const LI = document.body.getElementsByTagName('li');
-    for (i = 0; i < A.length; i++) {
-          function aa(idx){
-            FORM[idx].submit = function bb(event){
-              event.preventDefault();
-              function setWeb(idx){
-                  const newData= {nickname: NameInput.value, url: UrlInput.value, id:Date.now()};
-                  NameInput.value = "";
-    UrlInput.value = "";
-                  nList.push(newData); // array에 저장
-                  saveData();
-                  paintData(newData, idx);
-            }
-
-          function createX(idx){
-              const xButton = document.createElement('button');
-              xButton.innerHTML = "❌";
-              LI[idx].appendChild(xButton); 
-              xButton.addEventListener("click", deleteData); 
-        }
-          function paintData(newdata, idx){
-              FORM[idx].classList.add("hidden");
-              A[idx].innerText = newData.nickname;
-              A[idx].href = newData.url;
-              FORM[idx].id = newData.id; 
-              li[idx].onclick = ""; 
-              A[idx].onclick = "";
-            } 
-          }
-
-        }
-      }(i);
-}
+//function aaa(){
+//    for (i = 0; i < A.length; i++){
+//      FORM[i].addEventListener("submit",createX);
+//    } 
+//} /// 흠, 이런 식으로 부여하려고 하는데,,,
 
 
-main();
-*/
-
-// 피드백: 잘못 올려주셨거나 IIFE를 잘못 작성한 것 같습니다. 그리고 main 함수가 실행되면 setWeb과 creatX 함수는 선언만 되고 실행은 되지 않을것 같습니다. 선언과 실행은 다르니 참고하시길 바랍니다
-
-const A = document.body.getElementsByTagName('a'); 
-const FORM = document.body.getElementsByTagName('form');
-const LI = document.body.getElementsByTagName('li');
-    
 
 
-function setWeb(idx){
+function setWeb(){
+    event.preventDefault(); 
     const newData= {nickname: NameInput.value, url: UrlInput.value, id:Date.now()};
     NameInput.value = "";
     UrlInput.value = "";
     nList.push(newData); // array에 저장
     saveData();
-    paintData(newData, idx);
+    paintData(newData); //여기서 문제가 있는듯...
+    createX(); 
 }
 
-function createX(idx) {
+function createX() {
     const xButton = document.createElement('button');
     xButton.innerHTML = "❌";
-    LI[idx].appendChild(xButton); 
+    LI[0].appendChild(xButton); 
     xButton.addEventListener("click", deleteData);   
 }
 
-function paintData(newdata, idx){
-    FORM[idx].classList.add("hidden");
-    A[idx].innerText = newData.nickname;
-    A[idx].href = newData.url;
-    FORM[idx].id = newData.id; 
-    li[idx].onclick = ""; 
-    A[idx].onclick = "";
+function paintData(newData){
+    FORM[0].classList.add("hidden");
+    A[0].innerText = newData.nickname;
+    A[0].href = newData.url;
+    FORM[0].id = newData.id;
+    A[0].onclick = "";
+    // 설정된 값을 누를 때도 토글이 작동하는데, 이를 어떻게 막아야할까?    
+    // 흠,,, 해당 태그에 값이 있다면, 작동하지 않게 하는 방법???
 } 
 
-// 일단 함수들은 최대한 이렇게 따로 분류
 
 
 function MAIN(){
-    event.preventDefault();
     for (i = 0; i < A.length; i++) {
-      FORM[idx].submit = createX(i);
+      createX(i);
     }
 }
 
+sButton.addEventListener("click", setWeb);
+
+const getData = localStorage.getItem(NEWLIST); 
+
+if ((getData !== null) &&  (getData !== '[]')) {
+  const parsedList = JSON.parse(getData); // 각 값에 인덱스 부여
+  nList = parsedList; // 인덱스가 부여된 상태 유지 
+  parsedList.forEach(paintData); // 위 과정들을 유지한 상태에서 각 값에 paintData 적용
+  createX();
+} 
 
 
 
-  // 일단 function MAIN 안에 function 을 선언해도 MAIN만 실행하면 같이 실행되는 듯. 
-// FORM.addEventListener is not a function 에러가 뜨는데, FORM이 배열이라 작동이 안 되는듯...
-// getElementsByClassName returns an HTMLCollection, not an element. 
+//for (i=0;i<A.length;i++){
+//  const NameInput = FORM[i].querySelector("input:first-child");
+//  const UrlInput = document.body.querySelector("input:nth-child(2)");
+// const sButton = FORM[i].querySelector("button:first-of-type");
+       // querySelector 를 읽을 수 없다는 에러가 뜬다....
+//  sButton.addEventListener("click", setWeb);
 
+//}
+
+
+
+
+
+///////////////////////////////////////////////////////////
+
+function saveData() {
+  localStorage.setItem(NEWLIST, JSON.stringify(nList));
+} // {name: ---- , url: ----, id:----}}이 하나의 요소인 형태로 + 각 값을 string 형태로 저장!
+//웹 스토리지를 사용할 때 주의할 점은 오직 문자형 데이터 타입만 지원한다는 것이다. 
+// url 의 경우, JSON.stringify 화 되면 원래 url가 아니게 되버린다.
+
+function deleteData() {
+  const newData= {nickname: NameInput.value, url: UrlInput.value, id:Date.now()};
+  // x버튼을 누를 때 form에 해당하는 게 X. 그리고 이의 id를 조회하여 이를 localStorage에서만 삭제할 수 있으면 좋은데.... // 각 요소를 지우는 것이 아니라 이렇게 배열 변수를 호출해서
+  localStorage.removeItem(NEWLIST); //array를 통쨰로 지웠다가 
+  
+  // function deletedData(element)  {if(element.id === 'apple') return true;}
+  //nList.findindexof();
+  nList=nList.filter((toBye)=>toBye.id !==parseInt(FORM[0].id)); //필터한 새로운 array 설정 // nList=nList.filter(function(toBye) {if toBye.id !==parseInt(first1_Form.id)return true;}
+  saveData(); // 그 array를 저장
+  paintData(newData);
+  alert("해당 즐겨찾기를 삭제하였습니다.");
+} // 노마드의 경우, 새로 생성된 객체를 없애면 되는 거지만, 여기는 localStorage에서 없애야....
+// 누른 것에 해당되는 localStorage만 없애기는 어떻게???
+
+//----------------------------------
+/*
 
 const firfir = document.body.querySelector(".firfir");
 const first_1 = firfir.querySelector(".first_first");
@@ -112,30 +134,6 @@ const first1_UrlInput = first1_Form.querySelector("input:nth-child(2)");
 const sButton = first1_Form.querySelector("button:first-of-type");
 const NEWLIST="nList";
 
-let nList=[]; //array 형태로 초기화 시작
-
-function saveData() {
-  localStorage.setItem(NEWLIST, JSON.stringify(nList));
-} // {name: ---- , url: ----, id:----}}이 하나의 요소인 형태로 + 각 값을 string 형태로 저장!
-//웹 스토리지를 사용할 때 주의할 점은 오직 문자형 데이터 타입만 지원한다는 것이다. 
-// url 의 경우, JSON.stringify 화 되면 원래 url가 아니게 되버린다.
-
-function deleteData() {
-  const newData= {nickname: first1_NameInput.value, url: first1_UrlInput.value, id:Date.now()};
-  // x버튼을 누를 때 form에 해당하는 게 X. 그리고 이의 id를 조회하여 이를 localStorage에서만 삭제할 수 있으면 좋은데.... // 각 요소를 지우는 것이 아니라 이렇게 배열 변수를 호출해서
-  localStorage.removeItem(NEWLIST); //array를 통쨰로 지웠다가 
-  
-  // function deletedData(element)  {if(element.id === 'apple') return true;}
-  //nList.findindexof();
-  nList=nList.filter((toBye)=>toBye.id !==parseInt(first1_Form.id)); //필터한 새로운 array 설정 // nList=nList.filter(function(toBye) {if toBye.id !==parseInt(first1_Form.id)return true;}
-  saveData(); // 그 array를 저장
-  paintData(newData);
-  alert("해당 즐겨찾기를 삭제하였습니다.");
-} // 노마드의 경우, 새로 생성된 객체를 없애면 되는 거지만, 여기는 localStorage에서 없애야....
-// 누른 것에 해당되는 localStorage만 없애기는 어떻게???
-
-//----------------------------------
-/*
 function paintData(newData) {
   first1_Form.classList.add("hidden");
   first_1.innerText = newData.nickname;
