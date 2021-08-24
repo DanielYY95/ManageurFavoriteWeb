@@ -1,5 +1,4 @@
 
-
 const Clock = document.getElementById("clock");
 
 function GetTime() {
@@ -19,7 +18,7 @@ document.addEventListener('keydown', function(event) {
     if (event.keyCode === 13) {
         event.preventDefault();
     }
-});
+}); /// 추후, 검색 기능이 있을 때 enter 를 못치게 하는 건 좀 ㅠㅠ
 
 // 키 다운이 발생했을 때, 함수. 해당 event의 keycode가 13이라면 발생하는 기본 이벤트를 멈춰라. true 는 무슨 뜻이지?? true 이면 작동하라는 소리인가??? event는 어떤 사건이라고 생각하면 된다. 뒤에 true 가 없어도 작동하긴 하는데,,, ==> Option true 이면, Capturing 방식으로 이벤트가 전달되며, false 이며, Bubling 방식으로 이벤트가 전달된다. 기본값은 false이다.
 
