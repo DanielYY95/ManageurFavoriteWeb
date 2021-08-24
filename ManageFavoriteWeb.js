@@ -1,92 +1,90 @@
-const A = document.body.getElementsByTagName('a'); 
+
+const A = document.body.getElementsByTagName('a');
 const FORM = document.body.getElementsByTagName('form');
 const LI = document.body.getElementsByTagName('li');
+
 
 const NameInput = FORM[0].querySelector("input:first-child");
 const UrlInput = FORM[0].querySelector("input:nth-child(2)");
 const sButton = FORM[0].querySelector("button:first-of-type");
 
-const firfir = document.body.querySelector(".firfir");
-const first_1 = firfir.querySelector(".first_first");
-const first1_Form = document.body.querySelector("#first_1_Form");
 
-const NEWLIST="nList";
+const NEWLIST = "nList";
 
-let nList=[]; //array 형태로 초기화 시작
+let nList = []; //array 형태로 초기화 시작
 
-////////////////////////////////////////////////////////////
-
-
-
-// 클래스 이름: nth-child(N));
-// const N = 눌렀을 때 해당되는 index, onclick 이벤트했을 때 findindex
-// 그리고 그 index를 확인했으면 nth-child(index)에 해당하는 태그에 ㄱㄱ
-
-// x button의 경우, id같은 걸 따로 부여해줘야할 듯... 아닌가... 뭔가 좀 애매하네... button[]가 아니라 해당되는 form 안에 있는 두번째 button을 지우는 방식 같은 걸로 해야할 듯...
-
-// 문제
-// 1. input에 값을 입력했는데 storage에는 "" 가 들어가는 문제...
-// 2. FORM.addEventListener is not a function 에러가 뜨는데, FORM이 배열이라 작동이 안 되는듯...
-// 3. 계속 새로고침 되는 문제....
-
-
-//function aaa(){
-//    for (i = 0; i < A.length; i++){
-//      FORM[i].addEventListener("submit",createX);
-//    } 
-//} /// 흠, 이런 식으로 부여하려고 하는데,,,
-
-
-
-
-function setWeb(){
-    event.preventDefault(); 
-    const newData= {nickname: NameInput.value, url: UrlInput.value, id:Date.now()};
-    NameInput.value = "";
-    UrlInput.value = "";
-    nList.push(newData); // array에 저장
-    saveData();
-    paintData(newData); //여기서 문제가 있는듯...
-    createX(); 
+function saveData() {
+  localStorage.setItem(NEWLIST, JSON.stringify(nList));
 }
 
+//1.
+function deleteData() {
+  const newData = { nickname: NameInput.value, url: UrlInput.value, id: Date.now() };
+  localStorage.removeItem(NEWLIST);
+  nList = nList.filter((toBye) => toBye.id !== parseInt(FORM[0].id)); //필터한 새로운 array 설정 
+  saveData();
+  paintData(newData);
+  alert("해당 즐겨찾기를 삭제하였습니다.");
+}
+
+//2.
+function setWeb() {
+  event.preventDefault();
+  const newData = { nickname: NameInput.value, url: UrlInput.value, id: Date.now() };
+  NameInput.value = "";
+  UrlInput.value = "";
+  nList.push(newData); // array에 저장
+  saveData();
+  paintData(newData); //여기서 문제가 있는듯...
+  createX();
+}
+
+//3.
 function createX() {
-    const xButton = document.createElement('button');
-    xButton.innerHTML = "❌";
-    LI[0].appendChild(xButton); 
-    xButton.addEventListener("click", deleteData);   
+  const xButton = document.createElement('button');
+  xButton.innerHTML = "❌";
+  LI[0].appendChild(xButton);
+  xButton.addEventListener("click", deleteData);
+} // submit 혹은 setweb 할 때, 생성되게끔 // LI[] 안 인덱스를 입력해야한다.
+
+//4.
+function paintData(newData) {
+  FORM[0].classList.add("hidden");
+  A[0].innerText = newData.nickname;
+  A[0].href = newData.url;
+  FORM[0].id = newData.id;
+} // setweb 하고나서, 그리고 계속 유지할 수 있도록....
+// [] 인덱스를 입력해주어야...
+
+
+
+function MAIN() {
+  for (i = 0; i < A.length; i++) {
+
+  }
 }
 
-function paintData(newData){
-    FORM[0].classList.add("hidden");
-    A[0].innerText = newData.nickname;
-    A[0].href = newData.url;
-    FORM[0].id = newData.id;
-    A[0].onclick = "";
-    // 설정된 값을 누를 때도 토글이 작동하는데, 이를 어떻게 막아야할까?    
-    // 흠,,, 해당 태그에 값이 있다면, 작동하지 않게 하는 방법???
-} 
-
-
-
-function MAIN(){
-    for (i = 0; i < A.length; i++) {
-      createX(i);
-    }
-}
+//ASD[0].querySelector("button:first-of-type").addEventListener("click",function(){
+//  alert("000");
+//});
 
 sButton.addEventListener("click", setWeb);
+FORM[1].addEventListener("submit", function () {
+  alert("0");
+}); 
 
-const getData = localStorage.getItem(NEWLIST); 
+// 흠,,,, A[1] 은 addEventListener 가 먹히는디... FORM[1]도 먹힌다??
 
-if ((getData !== null) &&  (getData !== '[]')) {
+
+
+const getData = localStorage.getItem(NEWLIST);
+
+if ((getData !== null) && (getData !== '[]')) {
   const parsedList = JSON.parse(getData); // 각 값에 인덱스 부여
   nList = parsedList; // 인덱스가 부여된 상태 유지 
   parsedList.forEach(paintData); // 위 과정들을 유지한 상태에서 각 값에 paintData 적용
   createX();
-} 
-
-
+}  // 값이 있는 index 주소를 추출해서 createX에 부여해야할 듯.....
 
 //for (i=0;i<A.length;i++){
 //  const NameInput = FORM[i].querySelector("input:first-child");
@@ -98,10 +96,21 @@ if ((getData !== null) &&  (getData !== '[]')) {
 //}
 
 
+//function aaa(){
+//    for (i = 0; i < A.length; i++){
+//      FORM[i].addEventListener("submit",createX);
+//    } 
+//} /// 흠, 이런 식으로 부여하려고 하는데,,,
 
 
 
-///////////////////////////////////////////////////////////
+
+
+
+
+/////////////////////여기는 주석 처리 꼭 필요한 곳//////////////////////////////////
+
+/*
 
 function saveData() {
   localStorage.setItem(NEWLIST, JSON.stringify(nList));
@@ -122,6 +131,9 @@ function deleteData() {
   alert("해당 즐겨찾기를 삭제하였습니다.");
 } // 노마드의 경우, 새로 생성된 객체를 없애면 되는 거지만, 여기는 localStorage에서 없애야....
 // 누른 것에 해당되는 localStorage만 없애기는 어떻게???
+
+
+*/
 
 //----------------------------------
 /*
