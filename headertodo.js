@@ -16,20 +16,20 @@ let TODOLIST3=[];
 
 function setTodo(){
   event.preventDefault();
-  const TODO1 = TODOINPUT1.value;
+  const TODO1 = {text: TODOINPUT1.value, id: Date.now()} ;
   TODOINPUT1.value = "";
   TODOLIST1.push(TODO1);
   saveTodo();
   paintTodo(TODO1);
 }
 
-function saveTodo(i){
-  localStorage.setItem("NEWTODO1", TODOLIST1);
+function saveTodo(){
+  localStorage.setItem("NEWTODO1", JSON.stringify(TODOLIST1));
 }
 
-function paintTodo(x){
+function paintTodo(){
   TODOFORM[0].classList.add('hidden');
-  HEADERTODO[0].innertext = "x";
+  HEADERTODO[0].innertext = TODO1.text;
 }
 
 function deleteTodo(){
@@ -47,10 +47,9 @@ XTodoButton.addEventListener("click", deleteTodo);
 const getTodo = localStorage.getItem(NEWTODO1);
 
 if ((getTodo !== null) && (getTodo !== "")) {
-  //const parsedList = JSON.parse(getTodo); 
-  //TODOLIST1 = parsedList; 
-  //parsedList.forEach(paintTodo);
-  HEADERTODO[0].innertext = "getTodo";
+  const parsedListTodo = JSON.parse(getTodo); 
+  TODOLIST1 = parsedListTodo; 
+  parsedListTodo.forEach(paintTodo);
 } // 여기서 막히네...
 
 
@@ -62,5 +61,5 @@ if ((getTodo !== null) && (getTodo !== "")) {
 // paint 함수: 폼 hidden, div innertext가 input 값
 // 아이디어: form index를 해당 배열의 id로 부여할까???
 // array 형태로 들어가야하나??
-// deleteTodo가 바로 안되는문제
+
 
