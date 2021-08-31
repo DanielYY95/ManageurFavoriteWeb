@@ -1,13 +1,15 @@
 
 const A = document.body.getElementsByTagName('a');
-const FORM = document.body.getElementsByTagName('form');
 const LI = document.body.getElementsByTagName('li');
+const FORM = document.body.querySelectorAll("#asd");
+// 공통
 
+const SBUTTON = document.querySelectorAll("#setbutton");
 
-const NameInput = FORM[0].querySelector("input:first-child");
-const UrlInput = FORM[0].querySelector("input:nth-child(2)");
-const sButton = FORM[0].querySelector("button:first-of-type");
-
+// const NameInput = FORM[0].querySelector("input:first-child");
+// const UrlInput = FORM[0].querySelector("input:nth-child(2)");
+// const sButton = FORM[0].querySelector("button:first-of-type");
+// FROM의 인덱스에 따라 
 
 const NEWLIST = "nList";
 
@@ -15,7 +17,7 @@ let nList = []; //array 형태로 초기화 시작
 
 function saveData() {
   localStorage.setItem(NEWLIST, JSON.stringify(nList));
-}
+} //nList를 string 화해서 저장
 
 //1.
 function deleteData() {
@@ -33,7 +35,7 @@ function setWeb() {
   const newData = { nickname: NameInput.value, url: UrlInput.value, id: Date.now() };
   NameInput.value = "";
   UrlInput.value = "";
-  nList.push(newData); // array에 저장
+  nList.push(newData); 
   saveData();
   paintData(newData); //여기서 문제가 있는듯...
   createX();
@@ -56,22 +58,88 @@ function paintData(newData) {
 } // setweb 하고나서, 그리고 계속 유지할 수 있도록....
 // [] 인덱스를 입력해주어야...
 
+///////////////////////////////////////////////////
+
+function SETCONST(x){
+  const NameInput = FORM[x].querySelector("input:first-child");
+  const UrlInput = FORM[x].querySelector("input:nth-child(2)");
+  const sButton = FORM[x].querySelector("button:first-of-type");
+}
+
+function DELETESHIT(x) {
+  const newData = { nickname: NameInput.value, url: UrlInput.value, id: Date.now() };
+  localStorage.removeItem(NEWLIST);
+  nList = nList.filter((toBye) => toBye.id !== parseInt(FORM[x].id)); //필터한 새로운 array 설정 
+  saveData();
+  paintData(newData);
+  alert("해당 즐겨찾기를 삭제하였습니다.");
+}
+
+function CREATESHIT(x) {
+  const xButton = document.createElement('button');
+  xButton.innerHTML = "❌";
+  LI[x].appendChild(xButton);
+  xButton.addEventListener("click", deleteData);
+}
+
+function PAINTSHIT(newData) {
+  FORM[x].classList.add("hidden");
+  A[x].innerText = newData.nickname;
+  A[x].href = newData.url;
+  FORM[x].id = newData.id;
+}
+
+function TOP(){
+  const x=1;
+  SETCONST(x);
+  CREATESHIT(x);
+  PAINTSHIT(newData);
+
+}
+
+function SETSHIT() {
+  event.preventDefault();
+  const x=1;
+  SETCONST(x);
+  const newData = { nickname: NameInput.value, url: UrlInput.value, id: Date.now() };
+  NameInput.value = "";
+  UrlInput.value = "";
+  nList.push(newData); 
+  saveData();
+  PAINTSHIT(newData);
+  CREATESHIT(x);
+
+}
+
+
+//////////////////////////////////////////////////////////
 
 
 function MAIN() {
   for (i = 0; i < A.length; i++) {
-
+    
   }
 }
+
+MAIN();
+
+/*
+
+for i문에 먹히는 거
+1. LI[i].appendChild(xButton);
+2. 
+
+
+*/
+
+
 
 //ASD[0].querySelector("button:first-of-type").addEventListener("click",function(){
 //  alert("000");
 //});
 
-sButton.addEventListener("click", setWeb);
-FORM[1].addEventListener("submit", function () {
-  alert("0");
-}); 
+SBUTTON.addEventListener("click", SETSHIT);
+
 
 // 흠,,,, A[1] 은 addEventListener 가 먹히는디... FORM[1]도 먹힌다??
 
