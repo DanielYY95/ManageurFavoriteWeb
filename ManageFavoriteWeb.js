@@ -6,9 +6,9 @@ const FORM = document.body.querySelectorAll("#asd");
 
 const SBUTTON = document.querySelectorAll("#setbutton");
 
-// const NameInput = FORM[0].querySelector("input:first-child");
-// const UrlInput = FORM[0].querySelector("input:nth-child(2)");
-// const sButton = FORM[0].querySelector("button:first-of-type");
+const NameInput = FORM[0].querySelector("input:first-child");
+const UrlInput = FORM[0].querySelector("input:nth-child(2)");
+const sButton = FORM[0].querySelector("button:first-of-type");
 // FROM의 인덱스에 따라 
 
 const NEWLIST = "nList";
@@ -58,62 +58,6 @@ function paintData(newData) {
 } // setweb 하고나서, 그리고 계속 유지할 수 있도록....
 // [] 인덱스를 입력해주어야...
 
-///////////////////////////////////////////////////
-
-function SETCONST(x){
-  const NameInput = FORM[x].querySelector("input:first-child");
-  const UrlInput = FORM[x].querySelector("input:nth-child(2)");
-  const sButton = FORM[x].querySelector("button:first-of-type");
-}
-
-function DELETESHIT(x) {
-  const newData = { nickname: NameInput.value, url: UrlInput.value, id: Date.now() };
-  localStorage.removeItem(NEWLIST);
-  nList = nList.filter((toBye) => toBye.id !== parseInt(FORM[x].id)); //필터한 새로운 array 설정 
-  saveData();
-  paintData(newData);
-  alert("해당 즐겨찾기를 삭제하였습니다.");
-}
-
-function CREATESHIT(x) {
-  const xButton = document.createElement('button');
-  xButton.innerHTML = "❌";
-  LI[x].appendChild(xButton);
-  xButton.addEventListener("click", deleteData);
-}
-
-function PAINTSHIT(newData) {
-  FORM[x].classList.add("hidden");
-  A[x].innerText = newData.nickname;
-  A[x].href = newData.url;
-  FORM[x].id = newData.id;
-}
-
-function TOP(){
-  const x=1;
-  SETCONST(x);
-  CREATESHIT(x);
-  PAINTSHIT(newData);
-
-}
-
-function SETSHIT() {
-  event.preventDefault();
-  const x=1;
-  SETCONST(x);
-  const newData = { nickname: NameInput.value, url: UrlInput.value, id: Date.now() };
-  NameInput.value = "";
-  UrlInput.value = "";
-  nList.push(newData); 
-  saveData();
-  PAINTSHIT(newData);
-  CREATESHIT(x);
-
-}
-
-
-//////////////////////////////////////////////////////////
-
 
 function MAIN() {
   for (i = 0; i < A.length; i++) {
@@ -138,8 +82,8 @@ for i문에 먹히는 거
 //  alert("000");
 //});
 
-SBUTTON.addEventListener("click", SETSHIT);
-
+//SBUTTON.addEventListener("click", SETSHIT);
+sButton.addEventListener("click", setWeb);
 
 // 흠,,,, A[1] 은 addEventListener 가 먹히는디... FORM[1]도 먹힌다??
 
