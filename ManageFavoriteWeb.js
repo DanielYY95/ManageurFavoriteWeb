@@ -1,3 +1,37 @@
+/*FROM index 따라
+
+const NameInput = FORM[0].querySelector("input:first-child");
+const UrlInput = FORM[0].querySelector("input:nth-child(2)");
+const sButton = FORM[0].querySelector("button:first-of-type");
+
+function deleteData() {
+  const newData = { nickname: NameInput.value, url: UrlInput.value, id: Date.now() };
+  localStorage.removeItem(NEWLIST);
+  nList = nList.filter((toBye) => toBye.id !== parseInt(FORM[0].id)); //필터한 새로운 array 설정 
+  saveData();
+  paintData(newData);
+  alert("해당 즐겨찾기를 삭제하였습니다.");
+}
+
+function createX() {
+  const xButton = document.createElement('button');
+  xButton.innerHTML = "❌";
+  LI[0].appendChild(xButton);
+  xButton.addEventListener("click", deleteData);
+}
+
+function paintData(newData) {
+  FORM[0].classList.add("hidden");
+  A[0].innerText = newData.nickname;
+  A[0].href = newData.url;
+  FORM[0].id = newData.id;
+}
+
+
+
+*/
+
+
 
 const A = document.body.getElementsByTagName('a');
 const LI = document.body.getElementsByTagName('li');
