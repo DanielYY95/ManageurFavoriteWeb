@@ -1,16 +1,21 @@
 function showMeInput(){
     const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
-    const FORM = document.body.getElementsByTagName('form');
+    const FORM = document.body.querySelectorAll('#asd');
     for (i = 0; i < A.length; i++) {
         (function(idx) {
             A[idx].onclick = function(){
-              FORM[idx].classList.toggle('hidden'); // 오오 좋았다!! 잘 응용. 몇번째 form 태그
+              if (!(FORM[idx].id > 0  )) // 값이 설정되어도 toggle되는 현상 방지 // id가 숫자일때만
+              {FORM[idx].classList.toggle('hidden');} // 오오 좋았다!! 잘 응용. 몇번째 form 태그
+
             } 
             })(i);
     }
 }
 
 showMeInput();
+
+
+//form에 id 부여하려고 하는데, 숫자일때만 조건 설정하게끔
 
 /* const A = document.body.getElementsByTagName('a'); // 태그 이름으로 불러온다.
 for (i = 0; i < A.length; i++) {
@@ -42,3 +47,12 @@ for (i = 0; i < A.length; i++) {
 // (i)가 idx 로 들어간다??? 
 // IIFE 이다. 즉시실행함수. 그냥 간편하게 작성하기위해 저렇게 한 것 같다. for문 안에 다 작성해놓고, function 선언하고나서 그 선언한 함수에 들어갈 argument를 반복하는 것
 //https://blog.naver.com/leeba37/221802546747 참고
+/*
+근데,,, a태그를 불러왔는데, nth-child 같은 걸 쓰지않더라도 바로 A태그[index] 를 사용할 수 있는 이유:  MDN 문서를 읽어보면 이런내용이 있습니다. A태그에 인덱스를 사용할 수 있는건 getElementsByTagName 함수가 HTMLCollection 을 반환하기 때문입니다.
+elements is a live HTMLCollection of elements with a matching tag name, in the order they appear. If no elements are found, the HTMLCollection is empty.
+
+https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName 
+
+
+
+*/
