@@ -1,68 +1,39 @@
-const HEADERTODO = document.querySelectorAll("#headerTodo");
-const TODOFORM = document.querySelectorAll("div>form"); 
-const NEWTODO1 = "NEWTODO1";
-const NEWTODO2 = "NEWTODO2";
-const NEWTODO3 = "NEWTODO3";
+const Clock = document.getElementById("clock");
+const INPUT = document.querySelectorAll("input")
 
-const TODOtextarea1 = TODOFORM[0].querySelector("textarea:first-child");
-const TODOtextarea2 = TODOFORM[1].querySelector("textarea:first-child");
-const TODOtextarea3 = TODOFORM[2].querySelector("textarea:first-child");
-const XTodoButton = document.querySelector("button:first-of-type");
-const setTodoButton = document.querySelector("button:nth-child(2)");
-
-let TODOLIST1=[];
-let TODOLIST2=[];
-let TODOLIST3=[];
-
-
-function setTodo(){
-  event.preventDefault();
-  const TODO1 = {text: TODOtextarea1.value, id: Date.now()} ;
-  TODOtextarea1.value = "";
-  TODOLIST1.push(TODO1);
-  saveTodo();
-  paintTodo(TODO1);
+function GetTime() {
+  const date = new Date();
+  const Hours = String(date.getHours()).padStart(2, "0");
+  const Minutes = String(date.getMinutes()).padStart(2, "0");
+  const Seconds = String(date.getSeconds()).padStart(2, "0");
+  Clock.innerText = `${Hours}:${Minutes}:${Seconds}`;
 }
 
-function saveTodo(){
-  localStorage.setItem("NEWTODO1", JSON.stringify(TODOLIST1));
-}
+GetTime();
+setInterval(GetTime, 1000);
 
-function paintTodo(){
-  const TODO1 = {text: TODOtextarea1.value, id: Date.now()} ;
-  TODOFORM[0].classList.add('hidden');
-  HEADERTODO[0].innertext = TODO1.text;
-}
+//-- 시간
 
-function deleteTodo(){
-  localStorage.removeItem(NEWTODO1);
-  saveTodo();
-
-}
+document.querySelector("#Content").addEventListener("keydown",function(event){
+  if (event.keyCode === 13) {
+        event.preventDefault();
+    }
+});
 
 
-setTodoButton.addEventListener("click", setTodo);
-XTodoButton.addEventListener("click", deleteTodo);
+/* 이벤트 감지
+element.addEventListener("event", listener[, options]);
+element는 대상 DOM 요소, event는 노드에 바인딩될 이벤트, listener는 호출할 함수와 옵션. 옵션은 Option true 이면, Capturing 방식으로 이벤트가 전달되며, false 이며, Bubling 방식으로 이벤트가 전달된다. 기본값은 false이다. */ 
 
 
-// 오류: JSON은 {} 꼴로 되어야...
+/*이벤트 종류
+cached : 애플리케이션이 캐시될 때
+load : 웹 페이지의 로드가 완료되었을 때
+unload : 웹 페이지가 unload 될 때 (새로운 페이지를 요청한 경우)
+error : 브라우저가 자바스크립트 오류를 만났거나 리소스 로드를 실패했을 때
+resize : 브라우저 창의 크기를 조정했을 때
+scroll : 사용자가 페이지를 위아래로 스크롤 할 때
+focus : 엘리먼트가 포커스를 받았을 때(버블링하지 않음)
+click : 엘리먼트를 클릭 할 때
 
-const getTodo = localStorage.getItem(NEWTODO1);
-
-if ((getTodo !== null) && (getTodo !== "")) {
-  const parsedListTodo = JSON.parse(getTodo); 
-  TODOLIST1 = parsedListTodo; 
-  parsedListTodo.forEach(paintTodo);
-} // 여기서 막히네...
-
-
-// 함수를 세 개 만들어야하나??
-
-// index에 해당하는 form 에서 submit을 할 때
-// 그 값을 array에 push     array.push(value);
-// 새로운 array JSON 형식으로 저장 localStorage.setItem("KEY", Json.stringify(array));
-// paint 함수: 폼 hidden, div innertext가 textarea 값
-// 아이디어: form index를 해당 배열의 id로 부여할까???
-// array 형태로 들어가야하나??
-
-
+*/
