@@ -31,8 +31,6 @@ function paintData(newData) {
 
 */
 
-
-
 const A = document.body.getElementsByTagName('a');
 const LI = document.body.getElementsByTagName('li');
 const FORM = document.body.querySelectorAll("#asd");
