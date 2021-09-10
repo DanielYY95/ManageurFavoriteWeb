@@ -4,10 +4,11 @@ const NEWTODO1 = "NEWTODO1";
 const NEWTODO2 = "NEWTODO2";
 const NEWTODO3 = "NEWTODO3";
 
-const TODOINPUT1 = TODOFORM[0].querySelector("input:first-child");
-const TODOINPUT2 = TODOFORM[1].querySelector("input:first-child");
-const TODOINPUT3 = TODOFORM[2].querySelector("input:first-child");
+const TODOtextarea1 = TODOFORM[0].querySelector("textarea:first-of-type");
+const TODOtextarea2 = TODOFORM[1].querySelector("textarea");
+const TODOtextarea3 = TODOFORM[2].querySelector("textarea");
 const XTodoButton = document.querySelector("button:first-of-type");
+const setTodoButton = document.querySelector("button:nth-child(2)");
 
 let TODOLIST1=[];
 let TODOLIST2=[];
@@ -16,8 +17,8 @@ let TODOLIST3=[];
 
 function setTodo(){
   event.preventDefault();
-  const TODO1 = {text: TODOINPUT1.value, id: Date.now()} ;
-  TODOINPUT1.value = "";
+  const TODO1 = {text: TODOtextarea1.value, id: Date.now()} ;
+  TODOtextarea1.value = "";
   TODOLIST1.push(TODO1);
   saveTodo();
   paintTodo(TODO1);
@@ -28,6 +29,7 @@ function saveTodo(){
 }
 
 function paintTodo(){
+  const TODO1 = {text: TODOtextarea1.value, id: Date.now()} ;
   TODOFORM[0].classList.add('hidden');
   HEADERTODO[0].innertext = TODO1.text;
 }
@@ -38,7 +40,8 @@ function deleteTodo(){
 
 }
 
-TODOFORM[0].addEventListener("submit", setTodo);
+
+setTodoButton.addEventListener("click", setTodo);
 XTodoButton.addEventListener("click", deleteTodo);
 
 
@@ -58,7 +61,7 @@ if ((getTodo !== null) && (getTodo !== "")) {
 // index에 해당하는 form 에서 submit을 할 때
 // 그 값을 array에 push     array.push(value);
 // 새로운 array JSON 형식으로 저장 localStorage.setItem("KEY", Json.stringify(array));
-// paint 함수: 폼 hidden, div innertext가 input 값
+// paint 함수: 폼 hidden, div innertext가 textarea 값
 // 아이디어: form index를 해당 배열의 id로 부여할까???
 // array 형태로 들어가야하나??
 
