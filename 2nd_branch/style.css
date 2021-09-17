@@ -7,14 +7,14 @@
   margin:0 auto;
 }
 
-#Input{
+#nameInput{
   text-align:center;
   width: 180px;
   height: 25px;
   font-size: 1.3em;
 }
 
-#Input2{
+#urlInput{
   text-align:center;
   width: 180px;
   height: 25px;
@@ -51,7 +51,8 @@ button{
     font-size: 1.3em;
     text-align: center;
     border:1px solid black;
-    background-color: limegreen;
+    background-color: mintcream;
+    min-height:40px;
 }
 
 
