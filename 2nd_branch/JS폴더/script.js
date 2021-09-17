@@ -1,61 +1,46 @@
-const inv= document.body.querySelector("#Form");
-const inv2= document.body.querySelector("#Input");
-const inv3 = document.body.querySelector("#Input2");
-const LIST=document.body.querySelector("#list");
-const COINLIST="CList";
-const setButton = document.body.querySelector("button:first-of-type");
-
-
-let CList=[]; 
-
-function paintCoin(newCoin){
-  const li = document.createElement("li");
-  li.id=newCoin.id;
-  const a = document.createElement("a");
-  a.innerText = newCoin.Name+"          "; 
-  a.href = newCoin.Url;
-  const button = document.createElement("button");
-  button.innerText="❌"; 
-  button.addEventListener("click", deleteCoin);
-  li.appendChild(a); 
-  li.appendChild(button);
-  for (i=0; i<6; i++)
-{ if (X === Group[i])
-    {
-      const LIST = document.getElementById(List[i]);
-      LIST.appendChild(li);
-    }
-  }
-}
-
-function saveCoin(){
-  localStorage.setItem(COINLIST,JSON.stringify(CList));
+// localStorage에 SList 배열을 Json형태로 문자열화해서 저장
+// KEY 값은 SITELIST
+function saveObj(){
+  localStorage.setItem(SITELIST,JSON.stringify(SList));
 } 
 
-function coinInvest(){
+// 
+function submitObj(){
   event.preventDefault();
-  if ((inv2.value !=="") && (inv3.value!=="") && (Category.value !==""))  { 
-    const newCoin={ Name:inv2.value, Url: inv3.value, Category: Category.value, id:Date.now()  
+  if ((nameINPUT.value !=="") && (urlINPUT.value!=="") && (category.value !==""))  { 
+    const newDataObj={Name:nameINPUT.value, Url: urlINPUT.value, Category: category.value, id:Date.now()  
   };
-    inv2.value=""; 
-    inv3.value="";
-    Category.value="";
-    CList.push(newCoin); 
-    paintCoin(newCoin);
-    saveCoin(); 
+    nameINPUT.value=""; 
+    urlINPUT.value="";
+    category.value="";
+    SList.push(newDataObj); 
+    paintObj(newDataObj);
+    saveObj(); 
 } 
   else{
     alert("값을 제대로 작성해주세요.");
   }
 }
 
-setButton.addEventListener("click", coinInvest);
+setButton.addEventListener("click", submitObj);
 
-const savedData=localStorage.getItem(COINLIST);
+const savedData=localStorage.getItem(SITELIST);
 
 if (savedData !==null){ 
 	const parsedList = JSON.parse(savedData); 
-	CList= parsedList; 
-	parsedList.forEach(paintCoin);
+	SList= parsedList;   
+	parsedList.forEach(paintObj);
 }
 
+
+
+// JSON.parse : 인수로 전달받은 문자열을 자바스크립트 객체로 변환하여 반환하는 메서드
+/* parsedList는 배열 객체라는 것을 알 수 있다. console.log(parsedList); 하면
+
+[ { Name: '2', Url: '2', Category: '개발자공부정리', id: 1631768785694 },
+  { Name: '2', Url: '32', Category: '개발참고', id: 1631853835846 },
+  { Name: '12', Url: '231', Category: '개발자공부정리', id: 1631853927357 },
+  { Name: '87', Url: '87', Category: '개인체크', id: 1631854808820 } ]
+
+*/ //이런 식으로 나온다.
+// forEach : 주어진 함수를 배열 요소마다 실행 
