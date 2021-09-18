@@ -1,3 +1,9 @@
+*{
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
 
 #InputForm{
   width: 300px;
@@ -7,14 +13,14 @@
   margin:0 auto;
 }
 
-#nameInput{
+.nameInput{
   text-align:center;
   width: 180px;
   height: 25px;
   font-size: 1.3em;
 }
 
-#urlInput{
+.urlInput{
   text-align:center;
   width: 180px;
   height: 25px;
@@ -22,7 +28,7 @@
   margin-top:15px;
 }
 
-#category{
+.category{
   width: 100px;
   text-align: center;
   position: relative;
@@ -30,7 +36,7 @@
   top: 20px;
 }
 
-#list>li{
+.list>li{
   padding-top:15px;
   //margin: 0 auto;
 }
