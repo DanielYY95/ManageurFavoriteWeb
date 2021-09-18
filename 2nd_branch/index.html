@@ -9,10 +9,10 @@
   <body>
     <div id="InputForm">  
           <form>
-            <input id="nameInput" type="text" placeholder="BookmarkName" />
-            <input id="urlInput" type="text" placeholder="BookmarkUrl" />
+            <input class="nameInput" type="text" placeholder="BookmarkName" />
+            <input class="urlInput" type="text" placeholder="BookmarkUrl" />
           </form>
-          <select id="category" required>
+          <select class="category" required>
             <option value="">선택</option>
             <option value="개인체크">개인체크</option>
             <option value="개발자공부정리">개발자공부정리</option>
@@ -21,19 +21,17 @@
             <option value="동기부여">동기부여</option>
             <option value="취미">취미</option>
           </select>
-
           <button>설정</button>
-          <ul id="emergency_list"></ul>
     </div>
 
     <Nav>
         <div id="nav_list">
-          <div>개인체크<ul id="check_list"></ul></div>
-          <div>개발자공부정리<ul id="summary_list"></ul></div>
-          <div>개발공부<ul id="study_list"></ul></div>
-          <div>개발참고<ul id="refer_list"></ul></div>
-          <div>동기부여<ul id="motivation_list"></ul></div>
-          <div>취미<ul id="hobby_list"></ul></div>          
+          <div>개인체크<ul class="check_list"></ul></div>
+          <div>개발자공부정리<ul class="summary_list"></ul></div>
+          <div>개발공부<ul class="study_list"></ul></div>
+          <div>개발참고<ul class="refer_list"></ul></div>
+          <div>동기부여<ul class="motivation_list"></ul></div>
+          <div>취미<ul class="hobby_list"></ul></div>          
         </div>
 
     </Nav>
