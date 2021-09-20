@@ -7,25 +7,51 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <header>
+      <firstBox>
 
-<!--InputForm-->    
-    <div id="InputForm">  
-          <form>
-            <input class="nameInput" type="text" placeholder="BookmarkName" maxlength="15" />
-            <input class="urlInput" type="text" placeholder="BookmarkUrl" />
-          </form>
-<!--Category Select box-->          
-          <select class="category" required>
-            <option value="">선택</option>
-            <option value="개인체크">개인체크</option>
-            <option value="개발자공부정리">개발자공부정리</option>
-            <option value="개발공부">개발공부</option>
-            <option value="개발참고">개발참고</option>
-            <option value="동기부여">동기부여</option>
-            <option value="취미">취미</option>
-          </select>
-          <button class="setbutton">설정</button>
-    </div>
+      </firstBox>
+
+      <secondBox>
+    <!--InputForm-->    
+        <div id="InputForm">  
+              <form>
+                <input class="nameInput" type="text" placeholder="BookmarkName" maxlength="15" />
+                <input class="urlInput" type="text" placeholder="BookmarkUrl" />
+              </form>
+    <!--Category Select box-->          
+              <select class="category" required>
+                <option value="">선택</option>
+                <option value="개인체크">개인체크</option>
+                <option value="개발자공부정리">개발자공부정리</option>
+                <option value="개발공부">개발공부</option>
+                <option value="개발참고">개발참고</option>
+                <option value="동기부여">동기부여</option>
+                <option value="취미">취미</option>
+              </select>
+              <button class="setbutton">설정</button>
+        </div>
+    <!--CLock-->
+        <div class="clock">00:00</div>
+        
+      </secondBox>
+
+      <thirdBox>
+
+
+    <!--Youtube Music & video-->
+        <iframe 
+        width="300" height="150" src="https://www.youtube.com/embed/8nXqcugV2Y4?autoplay=1&mute=1" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+        </iframe>
+        
+      </thirdBox>
+
+  </header>
+
 <!--List Category-->
     <Nav>
         <div id="nav_list">
@@ -45,7 +71,7 @@
     <script src="JS폴더/xbutton.js"></script>
     <script src="JS폴더/constgathering.js"></script>
     <script src="JS폴더/script.js"></script>
-
+    <script src="JS폴더/time.js"></script>
 
   </body>
 </html>
