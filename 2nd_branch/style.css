@@ -5,21 +5,29 @@
   padding: 0;
 } 
 
+header{
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  
+}
 
 #InputForm{
-  width: 300px;
+  width: 100%;
   min-height: 120px;
   text-align:center; 
   background-color: linen;
   margin:0 auto;
+  border-top-left-radius: 15px; 
+  border-top-right-radius: 15px; 
 } 
 
 
 .nameInput, .urlInput{
   text-align:center;
-  width: 180px;
   height: 25px;
   font-size: 1.3em;
+  display: block;
+  margin: 0 auto;
 }
 
 .urlInput{
@@ -41,9 +49,20 @@
   top: 20px;
 }
 
+.clock{
+  text-align:center;
+  font-size:1.5em;
+  background-color: navajowhite;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+iframe{
+  float:right;
+}
+
 
 #nav_list{
-  margin-top:40px;
   display:grid; 
   grid-template-columns: repeat(6, 1fr);
 }
