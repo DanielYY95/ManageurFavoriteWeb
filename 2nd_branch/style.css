@@ -11,14 +11,16 @@ header{
   
 }
 
+
 #InputForm{
   width: 100%;
-  min-height: 120px;
+  height: 120px;
   text-align:center; 
-  background-color: linen;
+  background-color: cornsilk;
   margin:0 auto;
   border-top-left-radius: 15px; 
   border-top-right-radius: 15px; 
+  position: relative;
 } 
 
 
@@ -38,15 +40,15 @@ header{
 .category{
   width: 100px;
   text-align: center;
-  position: relative;
-  left: 30px;
-  top: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 200px;
 }
 
 .setbutton{
-  float: right;
-  position: relative;
-  top: 20px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .clock{
