@@ -42,12 +42,12 @@ const TEXTLIST_2 = "textList_2";
 
 function whichButton(e){
   if ((e.target) === (textButton[0])){
-    const X = textContent[0];
+    let X = textContent[0];
     setText(X);
 
   }
   else if ((e.target) === (textButton[1])){
-    const X = textContent[1];
+    let X = textContent[1];
     setText(X);
   }
   else
@@ -56,17 +56,13 @@ function whichButton(e){
 
 function saveText(X){
   if(textContent[0])
-    localStorage.setItem(TEXTLIST_1,textList_1);
+    localStorage.setItem(TEXTLIST_1,JSON.stringify(textList_1));
   else
-    localStorage.setItem(TEXTLIST_2,textList_2);
+    localStorage.setItem(TEXTLIST_2,JSON.stringify(textList_2));
 }
 
-function paintText(newdata){
-
-//  if
-
-//  else
-
+function paintText(a){
+  textContent[0].value = a.Content;
 
 }
 
@@ -77,7 +73,7 @@ function setText(X){
   } else {
   textList_2.push(newTextdata);
   }
-//  paintText(newTextdata);
+  paintText(newTextdata);
   saveText(X);
 }
 
@@ -85,9 +81,13 @@ function setText(X){
 textButton[0].addEventListener("click", whichButton);
 textButton[1].addEventListener("click", whichButton);
 
+const getTextData = localStorage.getItem(TEXTLIST_1);
 
 
-
+if (getTextData !== null){
+  const XXX = JSON.parse(getTextData)[0];
+  textContent[0].value = XXX.Content;
+} 
 
 
 
