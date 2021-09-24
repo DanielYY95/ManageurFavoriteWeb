@@ -7,36 +7,24 @@
 
 header{
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
 }
 
-firstBox{
+firstBox, secondBox{
   position: relative;
 }
 
 .text1, .text2{
   position: absolute;
-  bottom: 0;
+  left: 0;
+  width: 92%;
 }
 
-.text1{
-  left:0;
-}
-
-.text2{
-  right:30px;
-}
-
-.textbutton1, .textbutton2{
+.textbutton{
   position: absolute;
+  right: 0;
   bottom: 0;
-}
-
-.textbutton1{
-  left: 369px;
-} 
-.textbutton2{
-  right: 0;  
+  width: 8%;
 }
 
 #InputForm{
@@ -69,7 +57,7 @@ firstBox{
   text-align: center;
   position: absolute;
   bottom: 0;
-  left: 175px;
+  
 }
 
 .setbutton{
@@ -87,7 +75,7 @@ firstBox{
 }
 
 iframe{
-  float:left;
+  float:right;
 }
 
 
