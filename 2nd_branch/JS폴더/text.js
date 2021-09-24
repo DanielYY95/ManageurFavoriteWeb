@@ -40,6 +40,7 @@ let textList_2 = [];
 const TEXTLIST_1 = "textList_1";
 const TEXTLIST_2 = "textList_2";
 
+/*
 function whichButton(e){
   if ((e.target) === (textButton[0])){
     let X = textContent[0];
@@ -53,43 +54,59 @@ function whichButton(e){
   else
     return;
 }
+*/
+
+
 
 function saveText(X){
-  if(textContent[0])
     localStorage.setItem(TEXTLIST_1,JSON.stringify(textList_1));
-  else
+}
+
+function saveText2(X){
     localStorage.setItem(TEXTLIST_2,JSON.stringify(textList_2));
 }
 
 function paintText(a){
   textContent[0].value = a.Content;
-
+}
+function paintText2(a){
+  textContent[1].value = a.Content;
 }
 
-function setText(X){
-  const newTextdata = {Content: X.value, id: Date.now() };
-  if (X = textContent[0]){
-  textList_1.push(newTextdata);
-  } else {
-  textList_2.push(newTextdata);
-  }
-  paintText(newTextdata);
+function setText1(){
+  const X = textContent[0];
+  const newTextdata1 = {Content: X.value, id: Date.now() };
+  textList_1.push(newTextdata1);
+  paintText(newTextdata1);
   saveText(X);
 }
 
+function setText2(){
+  const X = textContent[1];
+  const newTextdata2 = {Content: X.value, id: Date.now() };
+  textList_2.push(newTextdata2);
+  paintText2(newTextdata2);
+  saveText2(X);
+}
 
-textButton[0].addEventListener("click", whichButton);
-textButton[1].addEventListener("click", whichButton);
+
+
+textButton[0].addEventListener("click", setText1);
+textButton[1].addEventListener("click", setText2);
+
 
 const getTextData = localStorage.getItem(TEXTLIST_1);
-
+const getTextData2 = localStorage.getItem(TEXTLIST_2);
 
 if (getTextData !== null){
-  const XXX = JSON.parse(getTextData)[0];
-  textContent[0].value = XXX.Content;
+  const parsedText1 = JSON.parse(getTextData)[0];
+  textContent[0].value = parsedText1.Content;
 } 
 
-
+if (getTextData2 !== null){
+  const parsedText2 = JSON.parse(getTextData2)[0];
+  textContent[1].value = parsedText2.Content;
+} 
 
 
 
