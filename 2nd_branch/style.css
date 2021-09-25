@@ -17,7 +17,16 @@ firstBox, secondBox{
 .text1, .text2{
   position: absolute;
   left: 0;
-  width: 92%;
+  width: 88%;
+  padding: 2%; 
+  height: 88%;
+  border-radius: 10px;
+}
+
+.text1:focus, .text2:focus{
+  border: 1px solid dodgerblue;
+  outline: none;
+  box-shadow: 0 0 0 3px lightblue;
 }
 
 .textbutton{
@@ -53,10 +62,12 @@ firstBox, secondBox{
 
 
 .category{
-  width: 100px;
+  width: 20%;
   text-align: center;
   position: absolute;
   bottom: 0;
+  left: 40%;
+  right: 40%;
   
 }
 
@@ -124,3 +135,6 @@ li{
 
 // 가운데 정렬 margin: 0 auto; (body가 자동적으로 wrap이기에) 
 // button 같은 것들은 css에서 그냥 button이라 적어도 적용된다.
+
+
+// positon: absolute; 하고 width와 left, right 를 퍼센트 활용!!
