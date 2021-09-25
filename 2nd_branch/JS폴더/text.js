@@ -30,7 +30,7 @@ button.textcontent = "수정"
 */
 
 const textContent = document.querySelectorAll("textarea");
-const textButton = document.querySelectorAll("firstbox>button");
+const textButton = document.querySelectorAll(".textbutton");
 //array로 호출
 
 let textList_1 = [];
@@ -43,12 +43,12 @@ const TEXTLIST_2 = "textList_2";
 /*
 function whichButton(e){
   if ((e.target) === (textButton[0])){
-    let X = textContent[0];
+    const X = textContent[0];
     setText(X);
 
   }
   else if ((e.target) === (textButton[1])){
-    let X = textContent[1];
+    const X = textContent[1];
     setText(X);
   }
   else
@@ -56,25 +56,16 @@ function whichButton(e){
 }
 */
 
+// localStorage에 저장 //JSON 문자열화
+const saveText =((X)=>localStorage.setItem(TEXTLIST_1,JSON.stringify(textList_1)));
+const saveText2 = ((X)=>localStorage.setItem(TEXTLIST_2,JSON.stringify(textList_2)));
 
-
-function saveText(X){
-    localStorage.setItem(TEXTLIST_1,JSON.stringify(textList_1));
-}
-
-function saveText2(X){
-    localStorage.setItem(TEXTLIST_2,JSON.stringify(textList_2));
-}
-
-function paintText(a){
-  textContent[0].value = a.Content;
-}
-function paintText2(a){
-  textContent[1].value = a.Content;
-}
+// 화면 출력
+const paintText = ((a)=>textContent[0].value = a.Content);
+const paintText2 = ((a)=>textContent[1].value = a.Content);
 
 function setText1(){
-  const X = textContent[0];
+  const X = textContent[0]; 
   const newTextdata1 = {Content: X.value, id: Date.now() };
   textList_1.push(newTextdata1);
   paintText(newTextdata1);
@@ -89,12 +80,30 @@ function setText2(){
   saveText2(X);
 }
 
-
-
+//이벤트리스너
 textButton[0].addEventListener("click", setText1);
 textButton[1].addEventListener("click", setText2);
 
+//데이터 불러오기
+const getTextData1 = localStorage.getItem(TEXTLIST_1);
+const getTextData2 = localStorage.getItem(TEXTLIST_2);
 
+//for (i=1; i<=2; i++){
+
+if (getTextData1 !== null){
+  const parsedText1 = JSON.parse(getTextData1)[0];
+  textContent[0].value = parsedText1.Content;
+} 
+
+if (getTextData2 !== null){
+  const parsedText2 = JSON.parse(getTextData2)[0];
+  textContent[1].value = parsedText2.Content;
+} 
+
+//}
+
+
+/*
 const getTextData = localStorage.getItem(TEXTLIST_1);
 const getTextData2 = localStorage.getItem(TEXTLIST_2);
 
@@ -107,7 +116,4 @@ if (getTextData2 !== null){
   const parsedText2 = JSON.parse(getTextData2)[0];
   textContent[1].value = parsedText2.Content;
 } 
-
-
-
-
+*/
