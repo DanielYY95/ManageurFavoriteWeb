@@ -7,7 +7,7 @@
 
 header{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 2fr;
+  grid-template-columns: repeat(5,1fr);
 }
 
 firstBox, secondBox{
@@ -80,9 +80,19 @@ firstBox, secondBox{
 .clock{
   text-align:center;
   font-size:1.5em;
-  background-color: navajowhite;
+  background-color: bisque;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+}
+
+fourthBox>label{
+  display: block;
+  
+}
+
+fourthBox>label, fourthBox>h2{
+  text-align:center;
+  
 }
 
 iframe{
