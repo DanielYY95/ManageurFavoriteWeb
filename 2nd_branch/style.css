@@ -85,14 +85,38 @@ firstBox, secondBox{
   border-bottom-right-radius: 15px;
 }
 
-fourthBox>label{
-  display: block;
-  
+fourthBox{
+  position: relative;
+  background-color: seashell;
+  line-height: 5vh;
 }
 
-fourthBox>label, fourthBox>h2{
+fourthBox>label{
+  display: block;
   text-align:center;
-  
+  font-size: 20px;
+}
+
+fourthBox>h1{
+  text-align:center;
+  line-height: 5vh;
+}
+
+fourthBox>button{
+  position: absolute;
+  width: 20%;
+  bottom: 0;
+  border-radius: 20px;
+  font-size: 1em;
+}
+
+fourthBox>button:first-of-type{
+  left:20%;
+}
+
+
+fourthBox>button:last-of-type{
+  right:20%;
 }
 
 iframe{
