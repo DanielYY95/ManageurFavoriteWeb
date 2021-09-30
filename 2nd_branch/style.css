@@ -8,6 +8,7 @@
 header{
   display: grid;
   grid-template-columns: repeat(5,1fr);
+  background-color: darkslategrey;
 }
 
 firstBox, secondBox{
@@ -87,8 +88,9 @@ firstBox, secondBox{
 
 fourthBox{
   position: relative;
-  background-color: seashell;
+  background-color: burlywood;
   line-height: 5vh;
+  border-radius: 15px; 
 }
 
 fourthBox>label{
@@ -104,7 +106,7 @@ fourthBox>h1{
 
 fourthBox>button{
   position: absolute;
-  width: 20%;
+  width: 25%;
   bottom: 0;
   border-radius: 20px;
   font-size: 1em;
