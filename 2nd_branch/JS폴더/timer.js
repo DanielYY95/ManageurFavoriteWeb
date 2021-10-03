@@ -1,6 +1,6 @@
 const Button = document.querySelectorAll("fourthBox>button");
-const startPause = Button[0];
-const reset = Button[1];
+const startPauseButton = Button[0];
+const resetButton = Button[1];
 
 let second = 0;
 let minute = 0;
@@ -17,7 +17,7 @@ function stopWatch(){
   if(second > 59){
     minute++;
     appendMinutes.textContent = minute > 9 ? minute : '0' + minute;
-    seconds = 0;
+    second = 0;
     appendSeconds.textContent = "00";
   }
   if(minute > 59){
@@ -29,13 +29,29 @@ function stopWatch(){
 }
 }
 
-startPause.onclick = function(){
-  clearInterval(stopWatch);
-  setInterval(stopWatch,1000);
-}
+let play = (()=> setInterval(stopWatch,1000));
 
-reset.onclick = function(){
-  clearInterval(stopWatch);
+let toggle = true; 
+startPauseButton.onclick = function (e){ 
+  if(toggle){ 
+    play();
+    toggle = false; 
+    } 
+  else{ 
+    clearInterval(play);
+    toggle = true; 
+    }
+  }
+
+
+resetButton.onclick = function(){
+  clearInterval(play);
+  second = 0;
+  minute = 0;
+  hour = 0;
+  appendSeconds.textContent = "00";
+  appendMinutes.textContent = "00";
+  appendHours.textContent = "00";
 }
 
 
