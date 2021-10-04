@@ -46,24 +46,52 @@
         
       </thirdBox>
 
-      <fourthBox>
-        <label>공부시간</label>
-        <h1><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span></h1>
-        <button>시작/정지</button>
-        <button>초기화</button>
-      </fourthBox>
-      
-      <fifthBox>  
-    <!--Youtube Music & video-->
-        <iframe 
-        width="100%" height="100%" src="https://www.youtube.com/embed/8nXqcugV2Y4?autoplay=1&mute=1" 
-        title="YouTube video player" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-        </iframe>
+      <fourth_wrap>
+        <fourthBox>
+          <div class= "first_basic">
+            <li>
+            <a target="_blank">##</a></li>
+            <form id="Basictodo"" class="hidden">
+              <input type="text" placeholder="저장할 이름" value="" />
+              <input type="text" placeholder="Url 주소" value="" />
+              <button class="BasicSet">설정</button></form></div>
+          <div class= "second_basic">
+            <li>
+            <a target="_blank">##</a></li>
+            <form id="Basictodo" class="hidden">
+              <input type="text" placeholder="저장할 이름" value="" />
+              <input type="text" placeholder="Url 주소" value="" />
+              <button class="BasicSet">설정</button></form></div>
+          <div class= "third_basic">
+            <li>
+            <a target="_blank">##</a></li>
+            <form id="Basictodo" class="hidden">
+              <input type="text" placeholder="저장할 이름" value="" />
+              <input type="text" placeholder="Url 주소" value="" />
+              <button class="BasicSet">설정</button></form></div>
         
-      </fifthBox>
+        </fourthBox>
+
+        <fifthBox>
+          <label>공부시간</label>
+          <h1><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span></h1>
+          <button>시작/정지</button>
+          <button>초기화</button>
+        </fifthBox>
+        
+        <sixthBox>  
+      <!--Youtube Music & video-->
+          <iframe 
+          width="100%" height="100%" src="https://www.youtube.com/embed/8nXqcugV2Y4?autoplay=1&mute=1" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+          </iframe>
+          
+        </sixthBox>
+
+      </fourth_wrap>
 
   </header>
 
@@ -88,7 +116,9 @@
     <script src="JS폴더/constgathering.js"></script>
     <script src="JS폴더/script.js"></script>
     <script src="JS폴더/time.js"></script>
-    <script src="JS폴더/timer.js"></script>  
+    <script src="JS폴더/timer.js"></script> 
+    <script src="JS폴더/BasictodoToggle.js"></script> 
+     
 
   </body>
 </html>
