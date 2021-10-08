@@ -110,13 +110,12 @@ fourthBox{
   border-radius: 15px; 
 }
 
-fourthBox a{
-  
-}
 
 fourthBox li{
   text-align: left;
-  margin: 0px 40px 10px 10px;
+  margin: 0px 10px 10px 10px;
+  width: 15%;
+  display: flex;
 
 }
 
@@ -126,6 +125,11 @@ fourthBox li{
 
 fourthBox input{
   width: 50%;
+}
+
+
+li>button{
+  margin-left: 200px;
 }
 
 
