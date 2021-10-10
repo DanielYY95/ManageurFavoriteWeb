@@ -1,7 +1,7 @@
-
+//array로 호출
 const textContent = document.querySelectorAll("textarea");
 const textButton = document.querySelectorAll(".textbutton");
-//array로 호출
+
 
 let textList_1 = [];
 let textList_2 = [];
@@ -19,6 +19,8 @@ const paintText = ((a)=>textContent[0].value = a.Content);
 const paintText2 = ((a)=>textContent[1].value = a.Content);
 
 function setText1(){
+  textList_1.pop();
+  localStorage.removeItem(TEXTLIST_1);
   const X = textContent[0]; 
   const newTextdata1 = {Content: X.value, id: Date.now() };
   textList_1.push(newTextdata1);
@@ -27,6 +29,7 @@ function setText1(){
 }
 
 function setText2(){
+  localStorage.removeItem(TEXTLIST_2);
   const X = textContent[1];
   const newTextdata2 = {Content: X.value, id: Date.now() };
   textList_2.push(newTextdata2);
